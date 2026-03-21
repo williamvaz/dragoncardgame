@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Coleção - Dragon Ball TCG</title>
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/colecao.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <video class="bg-matrix" autoplay loop muted playsinline>
+            <source src="assets/background/home.mp4" type="video/mp4">
+        </video>
+
+        <header class="top-bar-global">
+            <div class="top-stats-wrapper">
+                <div class="top-stats-container">
+                    <div class="level-section">
+                        <span id="user-level" class="level-number">01</span>
+                    </div>
+                    <div class="info-section">
+                        <div class="exp-row">
+                            <span class="exp-label">EXP</span>
+                            <div class="exp-bar-bg">
+                                <div id="exp-fill" class="exp-bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <span id="exp-text" class="exp-text">0/100</span>
+                        </div>
+                        <div class="currency-row">
+                            <div class="currency-item">
+                                <span id="user-coins" class="currency-value">0</span>
+                                <img src="assets/elements/coins.webp" alt="Zeni" class="currency-icon">
+                            </div>
+                            <div class="currency-item">
+                                <span id="user-senzus" class="currency-value">0</span>
+                                <img src="assets/elements/senzu.webp" alt="Semente" class="currency-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scouter-section">
+                    <img src="assets/elements/scouter.webp" alt="Scouter" class="scouter-img">
+                </div>
+            </div>
+        </header>
+
+        <main class="colecao-scroll-container">
+            <h2 class="label-digital">DECK</h2>
+            <div class="deck-grid">
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+                <div class="card-slot empty"><span>+</span></div>
+            </div>
+
+            <div class="filter-controls">
+                <button class="btn-scouter-filter">RARIDADE</button>
+                <button class="btn-scouter-filter">SAGA</button>
+                <button class="btn-scouter-filter">CLASSE</button>
+                <button class="btn-scouter-filter">SKILLS</button> <button class="btn-scouter-filter">ORDENAR</button>
+            </div>
+
+            <h2 class="label-digital">TODAS AS CARTAS</h2>
+            <div id="main-collection-grid" class="collection-grid"></div>
+        </main>
+
+        <nav class="bottom-menu-global">
+            <div class="menu-item" onclick="location.href='store.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/loja.webp"></div><span>LOJA</span>
+            </div>
+            <div class="menu-item active" onclick="location.href='colecao.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/colecao.webp"></div><span>COLECAO</span>
+            </div>
+            <div class="menu-item" onclick="location.href='home.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/home.webp"></div><span>HOME</span>
+            </div>
+            <div class="menu-item" onclick="location.href='tasks.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/missoes.webp"></div><span>MISSOES</span>
+            </div>
+            <div class="menu-item" onclick="location.href='shenron.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/esferas.webp"></div><span>ESFERAS</span>
+            </div>
+        </nav>
+    </div>
+
+    <div id="info-popup" class="info-popup-overlay">
+        <div class="info-popup-content">
+            <button class="btn-close-popup" onclick="closeInfoPopup()">X</button>
+
+            <div class="info-sidebar">
+                <button id="tab-skills" class="sidebar-tab active" onclick="switchTab('skills')">S</button>
+                <button id="tab-bio" class="sidebar-tab" onclick="switchTab('bio')">i</button>
+            </div>
+
+            <div class="flip-card-container">
+                <div class="flip-card-inner" id="info-card-render">
+                    <div class="flip-card-front"></div>
+                    <div class="flip-card-back">
+                        <img src="pictures/template/Verso.webp" alt="Verso" class="card-back-img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-details-box">
+                <div id="content-skills" class="info-tab-content">
+                    <div id="skills-list"></div>
+                </div>
+                <div id="content-bio" class="info-tab-content" style="display: none;">
+                    <div class="saga-logo-container">
+                        <img id="info-saga-logo" src="" alt="Saga">
+                    </div>
+                    <p id="info-bio-text"></p>
+                    <div class="info-footer-controls">
+                        <div class="info-upgrade-wrapper">
+                            <span id="info-upgrade-label">0/0</span>
+
+                            <div class="info-upgrade-bar-bg">
+                                <div id="info-upgrade-fill"></div>
+                            </div>
+                        </div>
+                        <div class="info-buttons-row">
+                            <button class="btn-info-action use">USAR</button>
+                            <button class="btn-info-action evolve">EVOLUIR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/global.js"></script>
+    <script src="JS/colecao.js"></script>
+</body>
+
+</html>

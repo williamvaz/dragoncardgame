@@ -1,0 +1,309 @@
+/* --- CSS/capsules.css --- */
+
+/* Camada de fundo escurecida */
+.capsule-balloon-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Card Principal Estilo Metálico */
+.capsule-balloon-card {
+    background: linear-gradient(180deg, #1a251a 0%, #0a0f0a 100%);
+    border: 0.4dvh solid #4a6a4a;
+    border-radius: 2dvw;
+    width: 88dvw;
+    padding: 3dvh 2dvw;
+    position: relative;
+    box-shadow: 0 0 5dvw rgba(74, 106, 74, 0.4), inset 0 0 3dvw rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+/* Brilho neon no topo do card */
+.capsule-balloon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.2dvh;
+    background: linear-gradient(90deg, transparent, #a5e043, transparent);
+}
+
+/* Moldura Circular com Glow Intenso */
+.balloon-header-icon {
+    position: relative;
+    margin: -8dvh auto 2dvh auto;
+    width: 22dvw;
+    height: 22dvw;
+    background: radial-gradient(circle, #2a3a2a 0%, #000 75%);
+    border: 0.4dvh solid #a5e043;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 25px rgba(165, 224, 67, 0.9), inset 0 0 10px rgba(165, 224, 67, 0.4);
+    z-index: 10;
+}
+
+.balloon-header-icon img {
+    height: 16dvw;
+    filter: drop-shadow(0 0 1dvw rgba(255, 255, 255, 0.5));
+}
+
+.balloon-title {
+    font-family: 'digital-7' !important;
+    color: #a5e043;
+    font-size: 8dvw;
+    margin: 1dvh 0 3dvh 0;
+    letter-spacing: 0.5dvw;
+    text-shadow: 0 0 2dvw rgba(165, 224, 67, 0.5);
+}
+
+/* Grades de Recompensa (Monitor Scouter) */
+.balloon-rewards-grid {
+    display: flex;
+    gap: 3dvw;
+    padding: 0 2dvw;
+    margin-bottom: 3dvh;
+}
+
+.reward-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.reward-label {
+    font-family: 'digital-7' !important;
+    color: #a5e043;
+    font-size: 3.5dvw;
+    margin-bottom: 0.5dvh;
+    text-align: left;
+    padding-left: 1dvw;
+}
+
+.reward-value {
+    background: rgba(0, 0, 0, 0.7);
+    border: 0.15dvh solid #333;
+    border-radius: 1dvw;
+    padding: 1.5dvh 1dvw;
+    display: flex;
+    align-items: center;
+    gap: 2dvw;
+}
+
+.reward-value span {
+    font-family: 'digital-7' !important;
+    font-size: 5dvw;
+    color: #fff;
+}
+
+.reward-value img {
+    height: 3.5dvh;
+}
+
+/* Seção de Tempo (Quebra de Linha Corrigida) */
+.balloon-timer-section {
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 0.1dvh solid #333;
+    border-bottom: 0.1dvh solid #333;
+    padding: 2dvh 4dvw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3dvh;
+}
+
+.timer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.timer-label {
+    font-family: 'digital-7' !important;
+    color: #a5e043;
+    font-size: 3.8dvw;
+}
+
+.timer-value {
+    font-family: 'digital-7' !important;
+    color: #fff;
+    font-size: 6.5dvw;
+    white-space: nowrap;
+}
+
+/* Botão de Abertura (Estilo Original/Limpo) */
+.btn-open-now {
+    background: linear-gradient(180deg, #a5e043 0%, #4a7c2c 100%);
+    border: 0.2dvh solid #fff;
+    border-radius: 1.2dvw;
+    min-width: 30dvw;
+    /* Aumentado um pouco para caber custo + texto */
+    padding: 1.2dvh 6dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 3dvw rgba(165, 224, 67, 0.3);
+}
+
+.btn-label {
+    font-family: Arial, Helvetica, sans-serif !important;
+    /* Fonte limpa */
+    color: #ffffff !important;
+    font-family: 'digital-7' !important;
+    font-size: 4.5dvw;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.btn-cost {
+    display: flex;
+    align-items: center;
+    gap: 1.5dvw;
+}
+
+.btn-cost span {
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #ffffff !important;
+    font-family: 'digital-7' !important;
+    font-size: 6.5dvw;
+    font-weight: bold;
+}
+
+.btn-cost img {
+    height: 3.5dvh;
+    filter: none !important;
+    /* Senzu Colorida */
+}
+
+.btn-close-balloon {
+    background: transparent;
+    font-family: 'digital-7' !important;
+    color: #ff4444;
+    border: none;
+    margin-top: 2dvh;
+    font-size: 5dvw;
+    opacity: 0.8;
+}
+
+/* Container dos avisos */
+.toast-container {
+    position: fixed;
+    top: 5dvh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    pointer-events: none;
+}
+
+/* Estilo do aviso de erro */
+.toast-message {
+    background: rgba(255, 0, 0, 0.9);
+    color: white;
+    font-family: 'digital-7', sans-serif !important;
+    padding: 1.5dvh 5dvw;
+    border-radius: 1dvw;
+    border: 2px solid #fff;
+    font-size: 5dvw;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+    animation: slideInDown 0.3s ease-out, shake 0.4s ease-in-out;
+}
+
+/* Animação de entrada e vibração */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        margin-left: 0;
+    }
+
+    25% {
+        margin-left: -10px;
+    }
+
+    75% {
+        margin-left: 10px;
+    }
+}
+
+/* --- ESTILO DO MODAL DE CONFIRMAÇÃO --- */
+.confirm-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100dvw; height: 100dvh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4000; /* Acima de tudo */
+}
+
+.confirm-card {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
+    border: 0.3dvh solid #4a6a4a;
+    border-radius: 2dvw;
+    width: 80dvw;
+    padding: 3dvh;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+}
+
+.confirm-title {
+    font-family: 'digital-7' !important;
+    color: #ff4444;
+    font-size: 8dvw;
+    margin-bottom: 2dvh;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.confirm-body {
+    font-family: 'digital-7' !important;
+    color: #fff;
+    font-size: 5dvw;
+    margin-bottom: 4dvh;
+    line-height: 1.2;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 3dvw;
+}
+
+.btn-confirm {
+    flex: 1;
+    font-family: 'digital-7' !important;
+    padding: 1.5dvh;
+    font-size: 5dvw;
+    border: none;
+    border-radius: 1dvw;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-green { background: #4caf50; border-bottom: 4px solid #2e7d32; }
+.btn-red { background: #f44336; border-bottom: 4px solid #c62828; }
+
+.btn-confirm:active { transform: translateY(2px); border-bottom: none; }

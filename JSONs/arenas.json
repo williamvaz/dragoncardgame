@@ -1,0 +1,302 @@
+[
+  {
+    "Arena": 1,
+    "Nome": "Arena Budokai",
+    "Trofeus minimos": 0,
+    "Trofeus maximos": 499,
+    "Desbloqueavel 1": 2, "Desbloqueavel 2": 20, "Desbloqueavel 3": 6, "Desbloqueavel 4": 5, "Desbloqueavel 5": 19,
+    "Desbloqueavel 6": 6, "Desbloqueavel 7": 5, "Desbloqueavel 8": 8, "Desbloqueavel 9": 1, "Desbloqueavel 10": 15,
+    "Descrição": "O grande palco das artes marciais da Terra. Onde jovens guerreiros testam suas habilidades em busca de gloria e do titulo de campeao sob o olhar de milhares.",
+    "Limite Z": "-", "Limite A": "-", "Limite B": "-"
+  },
+  {
+    "Arena": 2,
+    "Nome": "Ilha do Kame",
+    "Trofeus minimos": 500,
+    "Trofeus maximos": 999,
+    "Desbloqueavel 1": 14, "Desbloqueavel 2": 4, "Desbloqueavel 3": 20, "Desbloqueavel 4": 1, "Desbloqueavel 5": 18,
+    "Desbloqueavel 6": 3, "Desbloqueavel 7": 17, "Desbloqueavel 8": 7, "Desbloqueavel 9": 19, "Desbloqueavel 10": 2,
+    "Descrição": "Um pequeno paraiso tropical e o lar do mestre das artes marciais. O treinamento pesado entre cascos de tartaruga e entregas de leite comeca neste local isolado.",
+    "Limite Z": "-", "Limite A": "-", "Limite B": "-"
+  },
+  {
+    "Arena": 3,
+    "Nome": "Torre Musculo",
+    "Trofeus minimos": 1000,
+    "Trofeus maximos": 1499,
+    "Desbloqueavel 1": 11, "Desbloqueavel 2": 1, "Desbloqueavel 3": 15, "Desbloqueavel 4": 3, "Desbloqueavel 5": 7,
+    "Desbloqueavel 6": 12, "Desbloqueavel 7": 10, "Desbloqueavel 8": 18, "Desbloqueavel 9": 19, "Desbloqueavel 10": 16,
+    "Descrição": "Uma fortaleza gelada comandada pela temida Red Ribbon. Cada andar esconde um perigo mecanico ou mortal que desafia a resistencia de qualquer invasor corajoso.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": "-"
+  },
+  {
+    "Arena": 4,
+    "Nome": "Cidade do Oeste",
+    "Trofeus minimos": 1500,
+    "Trofeus maximos": 1999,
+    "Desbloqueavel 1": 15, "Desbloqueavel 2": 4, "Desbloqueavel 3": 14, "Desbloqueavel 4": 10, "Desbloqueavel 5": 13,
+    "Desbloqueavel 6": 15, "Desbloqueavel 7": 11, "Desbloqueavel 8": 1, "Desbloqueavel 9": 5, "Desbloqueavel 10": 4,
+    "Descrição": "O centro tecnologico do mundo e sede da Corporacao Capsula. Entre predios futuristas e veiculos voadores, a batalha pela sobrevivencia urbana se torna real.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": "-"
+  },
+  {
+    "Arena": 5,
+    "Nome": "Vila Pinguim",
+    "Trofeus minimos": 2000,
+    "Trofeus maximos": 2499,
+    "Desbloqueavel 1": 12, "Desbloqueavel 2": 20, "Desbloqueavel 3": 18, "Desbloqueavel 4": 2, "Desbloqueavel 5": 15,
+    "Desbloqueavel 6": 13, "Desbloqueavel 7": 7, "Desbloqueavel 8": 9, "Desbloqueavel 9": 4, "Desbloqueavel 10": 6,
+    "Descrição": "Um lugar bizarro onde o impossivel acontece rotineiramente. Forca absurda e invencoes malucas dominam este vilarejo pacato habitado por seres muito estranhos.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": "-"
+  },
+  {
+    "Arena": 6,
+    "Nome": "Base Red Ribbon",
+    "Trofeus minimos": 2500,
+    "Trofeus maximos": 2999,
+    "Desbloqueavel 1": 8, "Desbloqueavel 2": 5, "Desbloqueavel 3": 16, "Desbloqueavel 4": 10, "Desbloqueavel 5": 14,
+    "Desbloqueavel 6": 10, "Desbloqueavel 7": 20, "Desbloqueavel 8": 20, "Desbloqueavel 9": 13, "Desbloqueavel 10": 1,
+    "Descrição": "O quartel general do maior exercito maligno da Terra. Armas de alta tecnologia e oficiais implacaveis protegem os segredos e as ambicoes de conquista global.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": "-"
+  },
+  {
+    "Arena": 7,
+    "Nome": "Templo Vovo Uranai",
+    "Trofeus minimos": 3000,
+    "Trofeus maximos": 3499,
+    "Desbloqueavel 1": 7, "Desbloqueavel 2": 11, "Desbloqueavel 3": 20, "Desbloqueavel 4": 16, "Desbloqueavel 5": 20,
+    "Desbloqueavel 6": 5, "Desbloqueavel 7": 18, "Desbloqueavel 8": 10, "Desbloqueavel 9": 6, "Desbloqueavel 10": 16,
+    "Descrição": "Um palacio flutuante sobre um lago mistico. Guerreiros do outro mundo esperam para lutar contra aqueles que buscam respostas atraves da poderosa bola de cristal.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": "-"
+  },
+  {
+    "Arena": 8,
+    "Nome": "Torre de Karin",
+    "Trofeus minimos": 3500,
+    "Trofeus maximos": 3999,
+    "Desbloqueavel 1": 12, "Desbloqueavel 2": 15, "Desbloqueavel 3": 12, "Desbloqueavel 4": 13, "Desbloqueavel 5": 12,
+    "Desbloqueavel 6": 17, "Desbloqueavel 7": 7, "Desbloqueavel 8": 7, "Desbloqueavel 9": 19, "Desbloqueavel 10": 20,
+    "Descrição": "Uma estrutura colossal que toca o céu. Apenas os mais persistentes conseguem subir ate o topo para encontrar o mestre felino e provar da agua sagrada lendaria.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 1
+  },
+  {
+    "Arena": 9,
+    "Nome": "Castelo do Rei",
+    "Trofeus minimos": 4000,
+    "Trofeus maximos": 4499,
+    "Desbloqueavel 1": 9, "Desbloqueavel 2": 19, "Desbloqueavel 3": 19, "Desbloqueavel 4": 11, "Desbloqueavel 5": 16,
+    "Desbloqueavel 6": 19, "Desbloqueavel 7": 15, "Desbloqueavel 8": 15, "Desbloqueavel 9": 2, "Desbloqueavel 10": 15,
+    "Descrição": "O coracao politico do planeta Terra. Sob o ataque de demonios ancestrais, os corredores reais se transformam em um campo de batalha decisivo pelo destino real.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 1
+  },
+  {
+    "Arena": 10,
+    "Nome": "Plataforma Celeste",
+    "Trofeus minimos": 4500,
+    "Trofeus maximos": 4999,
+    "Desbloqueavel 1": 12, "Desbloqueavel 2": 15, "Desbloqueavel 3": 9, "Desbloqueavel 4": 20, "Desbloqueavel 5": 16,
+    "Desbloqueavel 6": 16, "Desbloqueavel 7": 18, "Desbloqueavel 8": 8, "Desbloqueavel 9": 14, "Desbloqueavel 10": 1,
+    "Descrição": "Local sagrado acima das nuvens onde reside o guardiao da Terra. Um santuario de paz e meditacao onde o espirito e o corpo sao levados ao limite da perfeicao.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 1
+  },
+  {
+    "Arena": 11,
+    "Nome": "Monte Paozu",
+    "Trofeus minimos": 5000,
+    "Trofeus maximos": 5499,
+    "Desbloqueavel 1": 18, "Desbloqueavel 2": 14, "Desbloqueavel 3": 16, "Desbloqueavel 4": 15, "Desbloqueavel 5": 8,
+    "Desbloqueavel 6": 9, "Desbloqueavel 7": 4, "Desbloqueavel 8": 17, "Desbloqueavel 9": 12, "Desbloqueavel 10": 12,
+    "Descrição": "Refugio remoto de natureza exuberante e montanhas colossais. E o lar lendario onde comecou a jornada de Goku, unindo paz ancestral e o despertar de um grande poder.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 1
+  },
+  {
+    "Arena": 12,
+    "Nome": "Sala do Tempo",
+    "Trofeus minimos": 5500,
+    "Trofeus maximos": 5999,
+    "Desbloqueavel 1": 10, "Desbloqueavel 2": 19, "Desbloqueavel 3": 17, "Desbloqueavel 4": 17, "Desbloqueavel 5": 20,
+    "Desbloqueavel 6": 12, "Desbloqueavel 7": 13, "Desbloqueavel 8": 16, "Desbloqueavel 9": 5, "Desbloqueavel 10": 9,
+    "Descrição": "Um vazio infinito onde um ano passa em apenas um dia. O isolamento extremo e a gravidade alterada forjam guerreiros capazes de superar qualquer limite mortal.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 1
+  },
+  {
+    "Arena": 13,
+    "Nome": "Arena Cell",
+    "Trofeus minimos": 6000,
+    "Trofeus maximos": 6499,
+    "Desbloqueavel 1": 3, "Desbloqueavel 2": 7, "Desbloqueavel 3": 11, "Desbloqueavel 4": 17, "Desbloqueavel 5": 13,
+    "Desbloqueavel 6": 15, "Desbloqueavel 7": 3, "Desbloqueavel 8": 7, "Desbloqueavel 9": 8, "Desbloqueavel 10": 6,
+    "Descrição": "Um ringue construido pelo ser perfeito para decidir o destino da humanidade. O silencio mortal do deserto ecoa a tensao de uma luta onde nao existe erro possivel.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 2
+  },
+  {
+    "Arena": 14,
+    "Nome": "Futuro em Ruinas",
+    "Trofeus minimos": 6500,
+    "Trofeus maximos": 6999,
+    "Desbloqueavel 1": 14, "Desbloqueavel 2": 16, "Desbloqueavel 3": 9, "Desbloqueavel 4": 19, "Desbloqueavel 5": 11,
+    "Desbloqueavel 6": 11, "Desbloqueavel 7": 15, "Desbloqueavel 8": 5, "Desbloqueavel 9": 17, "Desbloqueavel 10": 2,
+    "Descrição": "O que sobrou da civilizacao apos o apocalipse dos androides. Escombros e desespero marcam este cenario onde a esperanca e a unica arma contra a extincao total.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 2
+  },
+  {
+    "Arena": 15,
+    "Nome": "Planeta Sr Kaioh",
+    "Trofeus minimos": 7000,
+    "Trofeus maximos": 7499,
+    "Desbloqueavel 1": 14, "Desbloqueavel 2": 13, "Desbloqueavel 3": 9, "Desbloqueavel 4": 12, "Desbloqueavel 5": 10,
+    "Desbloqueavel 6": 16, "Desbloqueavel 7": 2, "Desbloqueavel 8": 16, "Desbloqueavel 9": 9, "Desbloqueavel 10": 5,
+    "Descrição": "Um mundo minusculo com gravidade esmagadora no fim do caminho da serpente. Ideal para aprender tecnicas divinas enquanto se persegue macacos velozes e grilos.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 2
+  },
+  {
+    "Arena": 16,
+    "Nome": "Planeta M2",
+    "Trofeus minimos": 7500,
+    "Trofeus maximos": 7999,
+    "Desbloqueavel 1": 3, "Desbloqueavel 2": 14, "Desbloqueavel 3": 6, "Desbloqueavel 4": 7, "Desbloqueavel 5": 18,
+    "Desbloqueavel 6": 13, "Desbloqueavel 7": 12, "Desbloqueavel 8": 18, "Desbloqueavel 9": 8, "Desbloqueavel 10": 8,
+    "Descrição": "Um mundo mecanico dominado por maquinas mutantes e inteligencia artificial. Metal e circuitos controlam tudo nesta esfera fria perdida no vasto espaco sideral.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 2
+  },
+  {
+    "Arena": 17,
+    "Nome": "Planeta Namekusei",
+    "Trofeus minimos": 8000,
+    "Trofeus maximos": 8499,
+    "Desbloqueavel 1": 8, "Desbloqueavel 2": 2, "Desbloqueavel 3": 14, "Desbloqueavel 4": 3, "Desbloqueavel 5": 15,
+    "Desbloqueavel 6": 8, "Desbloqueavel 7": 17, "Desbloqueavel 8": 11, "Desbloqueavel 9": 18, "Desbloqueavel 10": 10,
+    "Descrição": "Um mundo sereno de ceus verdes e mares azuis, berco das esferas do dragao originais. Suas ilhas isoladas guardam segredos de um povo pacato e muito poderoso.",
+    "Limite Z": 1, "Limite A": 1, "Limite B": 2
+  },
+  {
+    "Arena": 18,
+    "Nome": "Planeta Vegeta",
+    "Trofeus minimos": 8500,
+    "Trofeus maximos": 8999,
+    "Desbloqueavel 1": 18, "Desbloqueavel 2": 8, "Desbloqueavel 3": 16, "Desbloqueavel 4": 15, "Desbloqueavel 5": 12,
+    "Desbloqueavel 6": 12, "Desbloqueavel 7": 3, "Desbloqueavel 8": 4, "Desbloqueavel 9": 10, "Desbloqueavel 10": 18,
+    "Descrição": "O lar original da raca guerreira mais orgulhosa do universo. Sob um ceu avermelhado, a forca bruta e a hierarquia de combate definem quem deve liderar ou cair.",
+    "Limite Z": 1, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 19,
+    "Nome": "Planeta Vampa",
+    "Trofeus minimos": 9000,
+    "Trofeus maximos": 9499,
+    "Desbloqueavel 1": 1, "Desbloqueavel 2": 9, "Desbloqueavel 3": 1, "Desbloqueavel 4": 9, "Desbloqueavel 5": 3,
+    "Desbloqueavel 6": 9, "Desbloqueavel 7": 14, "Desbloqueavel 8": 20, "Desbloqueavel 9": 8, "Desbloqueavel 10": 7,
+    "Descrição": "Um mundo hostil habitado por criaturas gigantescas e tempestades de areia. A sobrevivencia neste lugar desolado molda guerreiros selvagens com instinto brutal.",
+    "Limite Z": 1, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 20,
+    "Nome": "Planeta Cereal",
+    "Trofeus minimos": 9500,
+    "Trofeus maximos": 9999,
+    "Desbloqueavel 1": 1, "Desbloqueavel 2": 18, "Desbloqueavel 3": 17, "Desbloqueavel 4": 18, "Desbloqueavel 5": 10,
+    "Desbloqueavel 6": 6, "Desbloqueavel 7": 8, "Desbloqueavel 8": 2, "Desbloqueavel 9": 16, "Desbloqueavel 10": 6,
+    "Descrição": "As ruinas de uma civilizacao dizimada por conquistadores espaciais. Um cenario melancolico onde o passado clama por vinganca em meio a montanhas e prados vastos.",
+    "Limite Z": 1, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 21,
+    "Nome": "Planeta Supremo",
+    "Trofeus minimos": 10000,
+    "Trofeus maximos": 10499,
+    "Desbloqueavel 1": 5, "Desbloqueavel 2": 18, "Desbloqueavel 3": 19, "Desbloqueavel 4": 16, "Desbloqueavel 5": 16,
+    "Desbloqueavel 6": 6, "Desbloqueavel 7": 15, "Desbloqueavel 8": 18, "Desbloqueavel 9": 9, "Desbloqueavel 10": 3,
+    "Descrição": "O solo sagrado dos deuses da criacao. Montanhas flutuantes e energia pura envolvem este local onde apenas os seres mais nobres do universo tem a permissao de pisar.",
+    "Limite Z": 1, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 22,
+    "Nome": "Planeta Prisao",
+    "Trofeus minimos": 10500,
+    "Trofeus maximos": 10999,
+    "Desbloqueavel 1": 1, "Desbloqueavel 2": 14, "Desbloqueavel 3": 20, "Desbloqueavel 4": 15, "Desbloqueavel 5": 10,
+    "Desbloqueavel 6": 16, "Desbloqueavel 7": 12, "Desbloqueavel 8": 19, "Desbloqueavel 9": 7, "Desbloqueavel 10": 15,
+    "Descrição": "Um complexo de mundos acorrentados por experimentos cientificos proibidos. Fugir deste labirinto espacial exige forca extrema e aliancas improvaveis entre rivais.",
+    "Limite Z": 1, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 23,
+    "Nome": "Planeta Bills",
+    "Trofeus minimos": 11000,
+    "Trofeus maximos": 11499,
+    "Desbloqueavel 1": 13, "Desbloqueavel 2": 8, "Desbloqueavel 3": 9, "Desbloqueavel 4": 17, "Desbloqueavel 5": 8,
+    "Desbloqueavel 6": 16, "Desbloqueavel 7": 3, "Desbloqueavel 8": 7, "Desbloqueavel 9": 9, "Desbloqueavel 10": 1,
+    "Descrição": "O dominio luxuoso do deus da destruicao. Um local de beleza estonteante onde o menor descuido pode resultar na aniquilacao total de um sistema solar inteiro.",
+    "Limite Z": 2, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 24,
+    "Nome": "Torneio do Outro Mundo",
+    "Trofeus minimos": 11500,
+    "Trofeus maximos": 11999,
+    "Desbloqueavel 1": 18, "Desbloqueavel 2": 20, "Desbloqueavel 3": 14, "Desbloqueavel 4": 15, "Desbloqueavel 5": 19,
+    "Desbloqueavel 6": 9, "Desbloqueavel 7": 17, "Desbloqueavel 8": 10, "Desbloqueavel 9": 10, "Desbloqueavel 10": 19,
+    "Descrição": "A competicao definitiva entre os maiores herois que ja partiram. Guerreiros lendarios de todas as galaxias se enfrentam diante dos quatro grandes mestres Kaioh.",
+    "Limite Z": 2, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 25,
+    "Nome": "Inferno",
+    "Trofeus minimos": 12000,
+    "Trofeus maximos": 12499,
+    "Desbloqueavel 1": 4, "Desbloqueavel 2": 18, "Desbloqueavel 3": 14, "Desbloqueavel 4": 7, "Desbloqueavel 5": 13,
+    "Desbloqueavel 6": 17, "Desbloqueavel 7": 3, "Desbloqueavel 8": 20, "Desbloqueavel 9": 20, "Desbloqueavel 10": 17,
+    "Descrição": "O destino final das almas malignas e viloes derrotados. Um lugar caotico de cores vibrantes e prisoes eternas onde o mal nunca descansa e a batalha e incessante.",
+    "Limite Z": 2, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 26,
+    "Nome": "Universo 0",
+    "Trofeus minimos": 12500,
+    "Trofeus maximos": 12999,
+    "Desbloqueavel 1": 17, "Desbloqueavel 2": 3, "Desbloqueavel 3": 3, "Desbloqueavel 4": 19, "Desbloqueavel 5": 5,
+    "Desbloqueavel 6": 15, "Desbloqueavel 7": 11, "Desbloqueavel 8": 12, "Desbloqueavel 9": 14, "Desbloqueavel 10": 17,
+    "Descrição": "Um vazio existencial onde tempo e espaco nao seguem regras conhecidas. A realidade se dobra diante de poderes que transcendem a compreensao de deuses e mortais.",
+    "Limite Z": 2, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 27,
+    "Nome": "Torneio do Poder",
+    "Trofeus minimos": 13000,
+    "Trofeus maximos": 13499,
+    "Desbloqueavel 1": 18, "Desbloqueavel 2": 20, "Desbloqueavel 3": 9, "Desbloqueavel 4": 2, "Desbloqueavel 5": 18,
+    "Desbloqueavel 6": 6, "Desbloqueavel 7": 16, "Desbloqueavel 8": 15, "Desbloqueavel 9": 12, "Desbloqueavel 10": 4,
+    "Descrição": "O palco supremo construído no mundo do nada. Doze universos lutam pela sua propria existencia em uma batalha real onde apenas um restara no final de tudo.",
+    "Limite Z": 2, "Limite A": 2, "Limite B": 2
+  },
+  {
+    "Arena": 28,
+    "Nome": "Dimensao dos Demonios",
+    "Trofeus minimos": 13500,
+    "Trofeus maximos": 13999,
+    "Desbloqueavel 1": 19, "Desbloqueavel 2": 14, "Desbloqueavel 3": 16, "Desbloqueavel 4": 7, "Desbloqueavel 5": 12,
+    "Desbloqueavel 6": 20, "Desbloqueavel 7": 7, "Desbloqueavel 8": 1, "Desbloqueavel 9": 16, "Desbloqueavel 10": 14,
+    "Descrição": "Um reino de sombras governado pela magia negra e sede de poder. Criaturas sombrias e feiticeiros antigos planejam a queda do mundo da luz a partir deste abismo.",
+    "Limite Z": "-", "Limite A": "-", "Limite B": "-"
+  },
+  {
+    "Arena": 29,
+    "Nome": "Arvore Sagrada",
+    "Trofeus minimos": 14000,
+    "Trofeus maximos": 14499,
+    "Desbloqueavel 1": 5, "Desbloqueavel 2": 9, "Desbloqueavel 3": 2, "Desbloqueavel 4": 2, "Desbloqueavel 5": 16,
+    "Desbloqueavel 6": 17, "Desbloqueavel 7": 19, "Desbloqueavel 8": 5, "Desbloqueavel 9": 9, "Desbloqueavel 10": 12,
+    "Descrição": "Uma planta parasita que drena a vida de planetas inteiros para gerar seus frutos. Sob suas raizes colossais, a energia vital do mundo e consumida sem piedade.",
+    "Limite Z": "-", "Limite A": "-", "Limite B": "-"
+  },
+  {
+    "Arena": 30,
+    "Nome": "Planeta Zenoh",
+    "Trofeus minimos": 14500,
+    "Trofeus maximos": 999999999,
+    "Desbloqueavel 1": 15, "Desbloqueavel 2": 6, "Desbloqueavel 3": 13, "Desbloqueavel 4": 19, "Desbloqueavel 5": 18,
+    "Desbloqueavel 6": 15, "Desbloqueavel 7": 4, "Desbloqueavel 8": 2, "Desbloqueavel 9": 6, "Desbloqueavel 10": 8,
+    "Descrição": "O centro de tudo, onde reside o rei de todos os universos. Um local de pureza absoluta onde um simples desejo pode criar ou apagar galaxias num piscar de olhos.",
+    "Limite Z": "-", "Limite A": "-", "Limite B": "-"
+  }
+]

@@ -1,0 +1,140 @@
+/* --- CSS/rewards.css --- */
+
+.reward-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100dvw; 
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.97); /* Fundo quase opaco para foco total */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.reward-title {
+    font-family: 'digital-7' !important;
+    color: #a5e043;
+    font-size: 10dvw;
+    margin-bottom: 5dvh;
+    text-align: center;
+    width: 100dvw;
+    text-shadow: 0 0 3dvw rgba(165, 224, 67, 0.6);
+}
+
+#anim-stage {
+    position: relative;
+    width: 100dvw;
+    height: 50dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD DE ITEM CENTRALIZADO COM POSICIONAMENTO ABSOLUTO NO CENTRO DO PALCO */
+.reward-card-pop {
+    background: linear-gradient(135deg, #1a251a 0%, #000 100%);
+    border: 0.6dvw solid #a5e043;
+    border-radius: 4dvw;
+    padding: 4dvh 6dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8dvw rgba(165, 224, 67, 0.3);
+    animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    position: absolute;
+    z-index: 50;
+}
+
+/* ANIMAÇÕES DA CÁPSULA */
+.capsule-anim-container.shake {
+    animation: shake-capsule 0.1s infinite;
+}
+
+.capsule-anim-container.explode {
+    animation: explode-capsule 0.5s forwards;
+}
+
+@keyframes shake-capsule {
+    0% { transform: translate(0.5dvw, 0.5dvh); }
+    50% { transform: translate(-0.5dvw, -0.5dvh); }
+    100% { transform: translate(0.5dvw, 0.5dvh); }
+}
+
+@keyframes explode-capsule {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.6); filter: brightness(10); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes pop-item {
+    0% { transform: scale(0) translateY(10dvh); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.reward-val-text {
+    font-family: 'digital-7' !important;
+    font-size: 12dvw;
+    color: #fff;
+    margin-top: 2dvh;
+}
+
+.step-counter {
+    color: #a5e043;
+    font-family: 'digital-7';
+    font-size: 4dvw;
+    margin-top: 2dvh;
+}
+
+/* GRID FINAL DE RESUMO */
+.final-grid {
+    display: flex;
+    gap: 5dvw;
+    margin-bottom: 6dvh;
+    justify-content: center;
+}
+
+.mini-card {
+    background: rgba(18, 24, 28, 0.9);
+    border: 0.4dvw solid #a5e043;
+    border-radius: 3dvw;
+    width: 28dvw;
+    height: 15dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-card img { height: 6dvh; margin-bottom: 1dvh; }
+.mini-card span { font-family: 'digital-7'; color: #fff; font-size: 6dvw; }
+
+.btn-reward-close {
+    background: #a5e043;
+    color: #000;
+    font-family: 'digital-7' !important;
+    border: none;
+    padding: 2dvh 15dvw;
+    font-size: 7dvw;
+    border-radius: 2dvw;
+    font-weight: bold;
+    box-shadow: 0 0 4dvw rgba(165, 224, 67, 0.4);
+}
+
+.tap-instruction {
+    color: #a5e043;
+    font-family: 'digital-7';
+    font-size: 5dvw;
+    margin-top: 4dvh;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}

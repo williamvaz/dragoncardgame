@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arenas - Dragon Ball TCG</title>
+    
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/arenas.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <video class="bg-matrix" autoplay loop muted playsinline>
+            <source src="assets/background/home.mp4" type="video/mp4">
+        </video>
+
+        <canvas id="touch-layer"></canvas>
+
+        <main id="arenas-list-container">
+            </main>
+
+        <button class="btn-voltar-arenas" onclick="location.href='home.html'">
+            VOLTAR
+        </button>
+    </div>
+
+    <script src="JS/global.js"></script>
+    <script src="JS/arenas.js"></script>
+
+    <script>
+        // Pequeno ajuste para garantir que o vídeo comece a tocar em alguns navegadores mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.querySelector('.bg-matrix');
+            if (video) {
+                video.play().catch(error => {
+                    console.log("Autoplay bloqueado pelo navegador, aguardando interação.");
+                });
+            }
+        });
+    </script>
+    <div id="info-modal" class="modal-overlay" onclick="closeInfoModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <h1 class="modal-title">SISTEMA DE LIMITES</h1>
+            <p id="modal-text" class="modal-body">Texto do limite aqui...</p>
+            <button class="btn-modal-close" onclick="closeInfoModal()">OK</button>
+        </div>
+    </div>
+
+</body>
+</html>

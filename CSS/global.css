@@ -1,0 +1,489 @@
+/* --- CONFIGURAÇÕES GLOBAIS --- */
+@font-face {
+    font-family: 'SuperSquad';
+    src: url('../assets/fonts/Super%20Squad.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'digital-7';
+    src: url('../assets/fonts/digital-7.ttf') format('truetype');
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'digital-7', sans-serif; /* Substitua SuperSquad por isso */
+    user-select: none; 
+    -webkit-user-drag: none; 
+}
+
+body { 
+    background-color: #000; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100dvh; 
+    width: 100dvw; 
+    overflow: hidden; 
+    color: white; 
+}
+
+#game-container {
+    width: 100dvw; 
+    height: 100dvh; 
+    max-width: 100%; 
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+    /* MUDANÇA: Alinha tudo no topo para o conteúdo central preencher o resto */
+    justify-content: flex-start; 
+    background-color: #000; 
+    overflow: hidden; /* Impede que a tela inteira role, travando as barras */
+}
+
+/* --- FUNDO DINÂMICO --- */
+.bg-matrix { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    min-width: 100%; 
+    min-height: 100%; 
+    width: auto;
+    height: auto;
+    object-fit: cover; 
+    z-index: 0; 
+    opacity: 0.4; 
+}
+
+/* --- BARRA DO TOPO (13,5%) --- */
+.top-bar-global {
+    height: 13.5dvh; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 0 2dvw; 
+    z-index: 100;
+    width: 100dvw;
+    /* MUDANÇA: Garante que ela nunca diminua de tamanho */
+    flex-shrink: 0; 
+}
+
+.top-stats-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.top-stats-container {
+    display: flex;
+    /* Fundo verde escuro translúcido */
+    background: rgba(5, 20, 5, 0.75); 
+    /* Borda verde neon mais fina e nítida */
+    border: 0.2dvw solid #a5e043; 
+    border-radius: 5dvw;
+    padding: 0.5dvh 6dvw 0.5dvh 3dvw; 
+    height: 8dvh;
+    align-items: center;
+    position: relative; 
+    /* Sombra interna para criar o efeito de "lente" */
+    box-shadow: inset 0 0 1.5dvw rgba(0, 255, 0, 0.2); 
+}
+
+.level-number {
+    font-family: 'digital-7', sans-serif;
+    color: #ccff00; 
+    font-size: 8dvw;
+    font-weight: 100; /* Digital-7 fica melhor assim */
+    line-height: 1;
+    margin-right: 3dvw;
+    text-shadow: 0 0 10px rgba(204, 255, 0, 0.7), 
+                 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+.info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5dvh;
+}
+
+/* --- ALINHAMENTO EXP --- */
+.exp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.exp-label {
+    color: #ff3333;
+    font-family: 'digital-7', sans-serif;
+    font-size: 4dvw;
+}
+
+.exp-bar-bg {
+    width: 32dvw; /* Ajustado para dar respiro ao texto formatado */
+    flex-shrink: 0; 
+    background: #000;
+    height: 1.5dvh; 
+    border-radius: 1dvw;
+    border: 0.1dvw solid #333;
+    margin: 0 1.5dvw;
+    overflow: hidden; 
+}
+
+.exp-bar-fill { 
+    background: linear-gradient(to bottom, #ccff00, #9abd0f);
+    height: 100%; 
+    /* Adicione uma transição para o ganho de XP ser suave */
+    transition: width 0.3s ease-out; 
+}
+.exp-text {
+    font-family: 'digital-7', sans-serif;
+    font-size: 3.5dvw;
+    color: #fff;
+    text-align: center; 
+    /* Garante espaço para "999M / 999M" */
+    min-width: 25dvw; 
+    font-variant-numeric: tabular-nums; 
+    letter-spacing: 0.1dvw;
+}
+
+/* --- RECURSOS: BLOCOS LCD E MOEDAS --- */
+.currency-row {
+    display: flex;
+    gap: 6dvw; /* Espaçamento entre moedas em largura de tela */
+    align-items: center;
+    padding-right: 4dvw;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    background: linear-gradient(to bottom, #2a2e31 50%, #12181c 50%);
+    padding: 0.2dvh 4dvw 0.2dvh 2dvw; 
+    border-radius: 1dvw;
+    border: 0.1dvw solid #000;
+    box-shadow: inset 0 0 1dvw rgba(0,0,0,0.8);
+    position: relative;
+    /* Removido o min-width fixo que causava o esmagamento */
+    flex: 1; 
+}
+
+.currency-item:first-child { 
+    min-width: 28dvw; 
+} 
+
+.currency-value {
+    font-family: 'digital-7', sans-serif;
+    font-size: 3.5dvw; /* Diminuído levemente para caber em telas menores */
+    color: #fff;
+    width: 100%;
+    text-align: right;
+    margin-right: 1dvw; /* Dá espaço para o ícone não sobrepor o número */
+}
+
+.currency-icon {
+    position: absolute;
+    right: -5dvw; /* Sobreposição baseada na largura da tela */
+    height: 10dvw; /* Ícone escala proporcionalmente */
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: drop-shadow(0.2dvw 0.2dvw 0.4dvw #000);
+    z-index: 5;
+}
+
+.scouter-section {
+    margin-left: -6dvw; 
+    z-index: 110;
+}
+
+.scouter-img {
+    height: 12dvh; /* Scouter cresce com a altura disponível */
+    display: block;
+}
+
+/* --- MENU INFERIOR (13,5% da Altura) --- */
+.bottom-menu-global {
+    height: 13.5dvh; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center;
+    background: linear-gradient(to top, rgba(0,0,0,1), transparent);
+    padding-bottom: calc(1dvh + env(safe-area-inset-bottom)); 
+    z-index: 10;
+    width: 100dvw; 
+    /* MUDANÇA: Garante que ele nunca suma ou encolha no scroll */
+    flex-shrink: 0; 
+}
+
+.menu-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    opacity: 0.7; 
+    transition: all 0.3s ease; /* Suaviza a animação de seleção */
+}
+
+.icon-bg { 
+    background: rgba(255, 255, 255, 0.8); 
+    border-radius: 50%; 
+    /* Aumente estes valores abaixo */
+    width: 16dvw;  
+    height: 16dvw; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 0.8dvh;
+    box-shadow: 0 0.5dvw 1dvw rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+/* Ajuste também o ícone dentro do círculo para ele acompanhar o crescimento */
+.menu-item img { 
+    height: 14dvw; /* Estava 7dvw, aumente para manter a proporção */
+    width: auto;
+}
+
+.menu-item span { 
+    font-family: 'digital-7', sans-serif; /* Alterado de SuperSquad para digital-7 */
+    font-size: 4.5dvw;
+    font-weight: normal; /* Digital-7 geralmente não precisa de negrito extra */
+    color: #fff; 
+    text-transform: uppercase;
+    letter-spacing: 0.2dvw; /* Um pouco mais de espaço entre letras ajuda no estilo digital */
+}
+
+/* Estado Ativo (Onde o jogador está) */
+.menu-item.active { 
+    opacity: 1; 
+    transform: translateY(-1dvh); /* Leve "pulo" para cima */
+}
+
+.menu-item.active .icon-bg { 
+    background: #fff; 
+    box-shadow: 0 0 4dvw #00ff00; /* Brilho de Ki verde */
+    border: 0.4dvw solid #00ff00;
+}
+
+/* --- AVISO PORTRAIT --- */
+#landscape-warning { 
+    display: none; position: fixed; top: 0; left: 0; width: 100dvw; height: 100dvh; 
+    background-color: #000; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; 
+}
+
+/* --- PARTICULAS --- */
+#touch-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100vh;
+    pointer-events: none; /* Essencial para não "roubar" o clique dos botões */
+    z-index: 9999;
+}
+
+.level-up-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.level-up-card {
+    position: relative;
+    width: 90dvw;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lvl-up-bg {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(165, 224, 67, 0.5);
+}
+
+.lvl-up-content {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.lvl-up-title {
+    font-size: 10dvw;
+    margin-bottom: 2vh;
+    text-shadow: 2px 2px #000;
+}
+
+.lvl-number {
+    font-size: 25dvw;
+    font-weight: bold;
+    margin-bottom: 2vh;
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.8);
+}
+
+.rewards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    margin-bottom: 3vh;
+}
+
+.reward-line {
+    display: flex;
+    align-items: center;
+    gap: 3dvw;
+    font-size: 7dvw;
+    font-weight: bold;
+}
+
+.reward-line img {
+    width: 10dvw;
+    max-width: 40px;
+}
+
+.btn-lvl-ok {
+    background: #a5e043;
+    color: #000;
+    border: none;
+    padding: 2vh 10dvw;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 5dvw;
+    cursor: pointer;
+}/* --- MODAL DE LEVEL UP (COBRINDO TELA CHEIA) --- */
+.level-up-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100dvw; height: 100vh;
+    /* Usa a imagem de fundo em tela cheia */
+    background: url('../assets/background/levelup.webp') no-repeat center center;
+    background-size: cover; /* Cobre tudo sem distorcer */
+    display: none; /* JS controla a exibição */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    /* Removemos o backdrop-filter pois o fundo já é a imagem */
+}
+
+/* Container interno para centralizar o texto sobre o radar */
+.level-up-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent; /* Remove qualquer fundo do card */
+    box-shadow: none; /* Remove sombras antigas */
+}
+
+/* Removemos a tag img antiga do HTML, pois agora é background-image */
+.lvl-up-bg {
+    display: none;
+}
+
+.lvl-up-content {
+    position: relative; /* Mudado de absolute para relative */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza verticalmente na tela toda */
+    color: #fff;
+    padding: 10vh 0; /* Dá um respiro nas bordas */
+}
+
+/* --- AJUSTES DE TEXTO --- */
+.lvl-up-title {
+    font-size: 12dvw; /* Aumentado um pouco */
+    margin-bottom: 5vh;
+    text-shadow: 0 0 15px rgba(165, 224, 67, 0.8), 2px 2px #000;
+}
+
+.lvl-number {
+    font-size: 30dvw; /* Número gigante no centro */
+    font-weight: bold;
+    margin-bottom: 5vh;
+    text-shadow: 0 0 20px #fff, 4px 4px 10px rgba(0,0,0,0.9);
+}
+
+.rewards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh; /* Mais espaçamento */
+    margin-bottom: 8vh;
+}
+
+.reward-line {
+    display: flex;
+    align-items: center;
+    gap: 5dvw;
+    font-size: 8dvw; /* Fonte maior */
+    font-weight: bold;
+    text-shadow: 2px 2px #000;
+}
+
+.reward-line img {
+    width: 12dvw;
+    max-width: 50px;
+}
+
+/* --- NOVO BOTÃO OK (FONTE BRANCA E ESTILO POLIDO) --- */
+.btn-lvl-ok {
+    background: transparent;
+    color: #fff; /* FONTE BRANCA SOLICITADA */
+    border: 0.5dvw solid #a5e043; /* Borda neon */
+    padding: 2.5vh 15dvw; /* Botão mais robusto */
+    border-radius: 50px; /* Bordas arredondadas */
+    font-weight: bold;
+    font-size: 6dvw;
+    cursor: pointer;
+    text-shadow: 0 0 10px #fff, 1px 1px #000;
+    box-shadow: 0 0 15px rgba(165, 224, 67, 0.5);
+    transition: all 0.2s ease;
+    font-family: 'digital-7', sans-serif; /* Usando a fonte do jogo */
+}
+
+.btn-lvl-ok:active {
+    transform: scale(0.9);
+    box-shadow: 0 0 5px rgba(165, 224, 67, 0.2);
+    background: rgba(165, 224, 67, 0.1); /* Brilho interno no clique */
+}
+
+/* Estado Normal: Borda e fundo padrão que você já tem */
+.free-reward {
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+/* Estado Pronto: Fica verde neon */
+.free-reward.ready-to-claim {
+    background-color: rgba(165, 224, 67, 0.8) !important; /* Verde neon com opacidade */
+    border-color: #fff !important;
+    cursor: pointer;
+    animation: pulseReady 1.5s infinite;
+}
+
+.free-reward.ready-to-claim .reward-text span {
+    color: #ffffff; /* Texto preto para contrastar com o fundo verde */
+}
+
+@keyframes pulseReady {
+    0% { transform: scale(1); box-shadow: 0 0 5px #a5e043; }
+    50% { transform: scale(1.02); box-shadow: 0 0 20px #a5e043; }
+    100% { transform: scale(1); box-shadow: 0 0 5px #a5e043; }
+}

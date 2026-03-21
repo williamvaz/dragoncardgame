@@ -1,0 +1,57 @@
+[
+  {
+    "ID": 1,
+    "Saga": "DB",
+    "Nome": "Dragon Ball"
+  },
+  {
+    "ID": 2,
+    "Saga": "DBZ",
+    "Nome": "Dragon ball Z"
+  },
+  {
+    "ID": 3,
+    "Saga": "DBS",
+    "Nome": "Dragon Ball Super"
+  },
+  {
+    "ID": 4,
+    "Saga": "DBGT",
+    "Nome": "Dragon Ball GT"
+  },
+  {
+    "ID": 5,
+    "Saga": "DBD",
+    "Nome": "Dragon Ball Daima"
+  },
+  {
+    "ID": 6,
+    "Saga": "DBSA",
+    "Nome": "Dragon Ball Manga"
+  },
+  {
+    "ID": 7,
+    "Saga": "SDBH",
+    "Nome": "Dragon Ball Super Heroes"
+  },
+  {
+    "ID": 8,
+    "Saga": "DBM",
+    "Nome": "Dragon Ball Multiverse"
+  },
+  {
+    "ID": 9,
+    "Saga": "DBAF",
+    "Nome": "Dragon Ball AF"
+  },
+  {
+    "ID": 10,
+    "Saga": "DBA",
+    "Nome": "Dragon Ball Absalon"
+  },
+  {
+    "ID": 11,
+    "Saga": "DBF",
+    "Nome": "Dragon Ball FanMade"
+  }
+]

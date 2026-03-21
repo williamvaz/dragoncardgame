@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dragon Ball TCG - Home</title>
+
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/home.css">
+    <link rel="stylesheet" href="CSS/capsules.css">
+    <link rel="stylesheet" href="CSS/rewards.css">
+</head>
+
+<body>
+    <div id="level-up-modal" class="level-up-overlay">
+        <div class="level-up-card">
+            <div class="lvl-up-content">
+                <h1 class="lvl-up-title">LEVEL UP!</h1>
+                <div id="new-level-display" class="lvl-number">01</div>
+                <div class="rewards-container">
+                    <div class="reward-line">
+                        <img src="assets/elements/coins.webp" alt="Zeni">
+                        <span id="reward-coins">+ 0</span>
+                    </div>
+                    <div class="reward-line">
+                        <img src="assets/elements/senzu.webp" alt="Senzu">
+                        <span id="reward-senzus">+ 0</span>
+                    </div>
+                </div>
+                <button class="btn-lvl-ok" onclick="closeLevelUp()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="touch-layer"></canvas>
+
+    <div id="landscape-warning">
+        <img src="assets/menu_icons/esferas.webp" alt="Esfera do Dragão" width="80">
+        <h2>Atencao Guerreiro!</h2>
+        <p>Por favor, vire o seu dispositivo para o modo retrato (em pe) para jogar.</p>
+    </div>
+
+    <div id="game-container">
+        <video class="bg-matrix" autoplay loop muted playsinline>
+            <source src="assets/background/home.mp4" type="video/mp4">
+        </video>
+
+        <header class="top-bar-global">
+            <div class="top-stats-wrapper">
+                <div class="top-stats-container">
+                    <div class="level-section">
+                        <span id="user-level" class="level-number">01</span>
+                    </div>
+                    <div class="info-section">
+                        <div class="exp-row">
+                            <span class="exp-label">EXP</span>
+                            <div class="exp-bar-bg">
+                                <div id="exp-fill" class="exp-bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <span id="exp-text" class="exp-text">0/100</span>
+                        </div>
+                        <div class="currency-row">
+                            <div class="currency-item">
+                                <span id="user-coins" class="currency-value">0</span>
+                                <img src="assets/elements/coins.webp" alt="Zeni" class="currency-icon">
+                            </div>
+                            <div class="currency-item">
+                                <span id="user-senzus" class="currency-value">0</span>
+                                <img src="assets/elements/senzu.webp" alt="Semente" class="currency-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scouter-section">
+                    <img src="assets/elements/scouter.webp" alt="Scouter" class="scouter-img">
+                </div>
+            </div>
+        </header>
+
+        <div class="home-content">
+            <div class="rewards-pass-section">
+                <div id="btn-free-capsule" class="free-reward" style="cursor: pointer;">
+                    <img src="pictures/capsules/1.webp" alt="Cápsula Grátis">
+                    <div class="reward-text">
+                        <span>RECOMPENSA GRaTIS<br>PRoXIMA EM:</span>
+                        <h3 id="free-reward-timer">CARREGANDO...</h3>
+                    </div>
+                </div>
+
+                <div class="battle-pass">
+                    <span>PASSE DE BATALHA</span>
+                    <div class="pass-bar-container">
+                        <div class="pass-level">01</div>
+                        <div class="pass-progress-bg">
+                            <div class="pass-progress-fill" style="width: 0%;"></div>
+                            <span class="pass-text">0/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <main class="radar-section">
+                <div class="radar-container" onclick="location.href='arenas.html'" style="cursor: pointer;">
+                    <img id="arena-display" class="arena-display" src="pictures/arenas/1.webp" alt="Arena Radar">
+                </div>
+            </main>
+
+            <div class="battle-buttons">
+                <div class="ranked-group">
+                    <button class="btn btn-ranked">
+                        <span>BATALHA<br>RANQUEADA</span>
+                    </button>
+                    <div class="trophy-badge">
+                        <img src="assets/elements/trophy.webp" alt="Troféu">
+                        <span id="user-trophies">0</span>
+                    </div>
+                </div>
+                <button class="btn btn-custom">
+                    BATALHA<br>CUSTOMIZADA
+                </button>
+            </div>
+
+            <section class="capsules-section">
+                <div class="capsule-slot"></div>
+                <div class="capsule-slot"></div>
+                <div class="capsule-slot"></div>
+                <div class="capsule-slot empty">
+                    <div class="empty-icon">+</div>
+                </div>
+            </section>
+        </div>
+
+        <nav class="bottom-menu-global">
+            <div class="menu-item" onclick="location.href='store.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/loja.webp" alt="Loja"></div><span>LOJA</span>
+            </div>
+            <div class="menu-item" onclick="location.href='colecao.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/colecao.webp" alt="Coleção"></div><span>COLECAO</span>
+            </div>
+            <div class="menu-item active" onclick="location.href='home.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/home.webp" alt="Home"></div><span>HOME</span>
+            </div>
+            <div class="menu-item" onclick="location.href='tasks.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/missoes.webp" alt="Missões"></div><span>MISSOES</span>
+            </div>
+            <div class="menu-item" onclick="location.href='shenron.html'">
+                <div class="icon-bg"><img src="assets/menu_icons/esferas.webp" alt="Esferas"></div><span>ESFERAS</span>
+            </div>
+        </nav>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="capsule-modal" class="capsule-balloon-overlay" style="display: none;">
+        <div class="capsule-balloon-card">
+            <div class="balloon-header-icon">
+                <img id="modal-capsule-img" src="">
+            </div>
+
+            <h1 id="modal-capsule-name" class="balloon-title">---</h1>
+
+            <div class="balloon-rewards-grid">
+                <div class="reward-box">
+                    <span class="reward-label">Zenis</span>
+                    <div class="reward-value">
+                        <img src="assets/elements/coins.webp">
+                        <span id="modal-zenis-val">0 - 0</span>
+                    </div>
+                </div>
+                <div class="reward-box">
+                    <span class="reward-label">Raridade minima garantida</span>
+                    <div class="reward-value">
+                        <img src="assets/menu_icons/colecao.webp">
+                        <span id="modal-cards-val">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="balloon-timer-section">
+                <div class="timer-left">
+                    <span class="timer-label">Tempo Restante:</span>
+                    <span id="modal-msg" class="timer-value">00m 00s</span>
+                </div>
+                <button id="btn-modal-confirm" class="btn-open-now">
+                    <span id="btn-label-text" class="btn-label">ABRIR AGORA</span>
+                    <div id="btn-cost-container" class="btn-cost">
+                        <span id="btn-cost-value">0</span>
+                        <img src="assets/elements/senzu.webp">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="confirm-overlay" style="display: none;">
+        <div class="confirm-card">
+            <h2 class="confirm-title">CUIDADO!</h2>
+            <p id="confirm-text" class="confirm-body">Deseja gastar Senzus para abrir instantaneamente?</p>
+
+            <div class="confirm-buttons">
+                <button id="confirm-cancel" class="btn-confirm btn-red">CANCELAR</button>
+                <button id="confirm-yes" class="btn-confirm btn-green">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reward-display-overlay" class="reward-overlay" style="display: none;">
+        <div class="reward-light-glow"></div>
+        <div class="reward-card-container">
+            <h1 class="reward-title">RECOMPENSAS!</h1>
+            <div id="items-won-grid" class="items-grid">
+            </div>
+            <button class="btn-reward-close" onclick="closeRewardScreen()">COLETAR</button>
+        </div>
+    </div>
+
+    <script src="JS/rewards.js"></script>
+    <script src="JS/global.js"></script>
+    <script src="JS/home.js"></script>
+    <script src="JS/capsules.js"></script>
+</body>
+
+</html>

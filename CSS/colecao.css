@@ -1,0 +1,821 @@
+/* --- CSS/colecao.css --- */
+
+/* 1. IMPORTAÇÃO DE FONTES 
+   Define a fonte personalizada para os nomes e atributos das cartas */
+@font-face {
+    font-family: 'VerdanaPro-CondBlack';
+    src: url('../assets/fonts/VerdanaPro-CondBlack.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* 2. LAYOUT PRINCIPAL 
+   Container que permite o scroll vertical e define o fundo escuro da coleção */
+.colecao-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2vh 4vw;
+    width: 100dvw;
+    background: rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+/* Rótulo com estilo digital (estilo Scouter) */
+.label-digital {
+    text-align: center;
+    font-family: 'digital-7', sans-serif;
+    display: block;
+    width: 100%;
+    font-size: 5dvw;
+    color: #fff;
+    margin: 2vh 0 1vh 0;
+    text-shadow: 0 0 10px #a5e043;
+    letter-spacing: 0.5dvw;
+    text-transform: uppercase;
+}
+
+/* 3. GRIDS DE EXIBIÇÃO
+   Organiza as cartas em 4 colunas responsivas */
+.deck-grid,
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2dvw;
+    margin-bottom: 3vh;
+}
+
+.card-container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+/* Área da imagem da carta com proporção de TCG padrão */
+.card-image-area {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1dvw;
+}
+
+/* 4. CAMADAS DA CARTA (Z-INDEX)
+   Organiza a sobreposição: Personagem (fundo) -> Raridade -> Template (frente) */
+.char-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.layer-rarity {
+    position: absolute;
+    top: 6.1%;
+    left: 4.9%;
+    width: 21.2%;
+    z-index: 2;
+}
+
+.layer-position {
+    position: absolute;
+    top: 20.7%;
+    left: 75.4%;
+    width: 20.3%;
+    z-index: 3;
+}
+
+.layer-class {
+    position: absolute;
+    top: 66%;
+    left: 6.4%;
+    width: 17.2%;
+    z-index: 4;
+}
+
+/* O template frontal fica acima das imagens, mas abaixo dos textos */
+.layer-template-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Estilo base para todos os textos dentro da carta */
+.card-text-element {
+    position: absolute;
+    font-family: 'VerdanaPro-CondBlack' !important;
+    color: #fff;
+    z-index: 10;
+    white-space: nowrap;
+    display: inline-block;
+    /* Adicionando as duas versões para sumir o aviso do editor */
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* APLICANDO NOS ATRIBUTOS ESPECÍFICOS */
+
+.layer-cost {
+    top: 12.5%;
+    left: 84.4%;
+    transform: translate(-50%, -50%);
+    font-size: 3.0dvw;
+    font-weight: 900;
+    -webkit-text-stroke: 0.09dvh black;
+    background-image: linear-gradient(to bottom, #ff4444 50%, #8b0000 50%);
+
+    /* Correção aqui */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.layer-name {
+    top: 70.5%;
+    left: 26.6%;
+    font-size: 1.15dvw;
+    -webkit-text-stroke: 0.03dvh black;
+    background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%);
+
+    /* Correção aqui */
+    letter-spacing: -0.1dvw; /* Valores negativos aproximam as letras */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.layer-atk {
+    top: 84.525%;
+    left: 27.5%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    font-size: 2.9dvw;
+    -webkit-text-stroke: 0.12dvh black;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%);
+
+    /* Correção aqui */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.layer-hp {
+    top: 84.525%;
+    left: 72.5%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    font-size: 2.9dvw;
+    -webkit-text-stroke: 0.12dvh black;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%);
+
+    /* Correção aqui */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 6. SLOTS VAZIOS (MONTAGEM DE DECK)
+   Estilo visual para os espaços onde o jogador pode adicionar cartas */
+.card-slot.empty {
+    aspect-ratio: 29.42 / 44.12;
+    border: 0.3dvw dashed rgba(165, 224, 67, 0.3);
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1dvw;
+}
+
+.card-slot.empty span {
+    color: #a5e043;
+    font-size: 8dvw;
+    font-weight: bold;
+    text-shadow: 0 0 10px #a5e043;
+}
+
+.deck-grid .card-slot {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1dvw;
+}
+
+/* 7. POPUP DE DETALHES (OVERLAY)
+   Interface que aparece ao clicar em uma carta */
+.info-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 5000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.info-popup-overlay.active {
+    display: flex;
+    pointer-events: auto;
+}
+
+.info-popup-content {
+    position: relative;
+    width: 90dvw;
+    height: 85dvh;
+    background: #051405;
+    border: 0.3dvh solid #a5e043;
+    border-radius: 2.5dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5dvh;
+    overflow: hidden;
+    justify-content: flex-start;
+    /* Alinha tudo no topo */
+}
+
+.btn-close-popup {
+    position: absolute;
+    top: 2dvh;
+    right: 3dvw;
+    width: 8dvw;
+    height: 8dvw;
+    background: rgba(255, 0, 0, 0.803);
+    /* Remove o fundo vermelho sólido */
+    border: 0.4dvw solid #ff4444;
+    /* Borda vermelha neon */
+    color: #ffffff;
+    /* Texto vermelho */
+    font-family: 'VerdanaPro-CondBlack', sans-serif;
+    /* Fonte robusta para o X */
+    font-size: 5dvw;
+    border-radius: 50%;
+    /* X dentro de um círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5100;
+    cursor: pointer;
+    text-shadow: 0 0 1dvw #660000;
+    box-shadow: inset 0 0 1dvw rgba(255, 68, 68, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* Efeito ao passar o mouse ou clicar no X */
+.btn-close-popup:active {
+    background: rgba(255, 68, 68, 0.2);
+    transform: scale(0.95);
+}
+
+/* 8. EFEITO FLIP (GIRAR CARTA)
+   Configuração 3D para ver o verso da carta no popup */
+.flip-card-container {
+    background-color: transparent;
+    height: 46dvh;
+    width: calc(46dvh / 1.48);
+    perspective: 1500px;
+    margin: 0.5dvh auto;
+    touch-action: none;
+    cursor: grab;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    /* Permite que os filhos herdem o 3D */
+    transition: transform 0.6s;
+}
+
+.flip-card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    /* CRUCIAL */
+    z-index: 2;
+    /* Garante que comece na frente */
+    transform: rotateY(0deg);
+}
+
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    /* Esconde quando está de costas */
+    transform: rotateY(180deg);
+    /* Gira o verso para a posição correta */
+    background: #000;
+    /* Fundo de segurança caso a imagem falhe */
+    border-radius: 2.5dvh;
+}
+
+/* Garante que a imagem do verso ocupe todo o espaço */
+.card-back-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Ajustes de escala de texto para a carta ampliada no popup */
+.flip-card-front .layer-name {
+    font-size: 1.6dvh !important;
+    letter-spacing: -0.3dvw; /* Valores negativos aproximam as letras */
+    left: 28%;
+    top: 70%;
+}
+
+.flip-card-front .layer-cost {
+    position: absolute;
+    /* 1. POSIÇÃO: Ajuste fino no centro do círculo */
+    top: 12.5%;
+    left: 84.5% !important;
+
+    /* 2. ALINHAMENTO: Garante que o CENTRO do número seja a referência */
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 3. TAMANHO E FONTE */
+    font-size: 4dvh !important;
+    width: 8dvh;
+    text-align: center;
+    z-index: 10;
+    -webkit-text-stroke: 0.15dvh #000;
+}
+
+.flip-card-front .layer-atk,
+.flip-card-front .layer-hp {
+    font-size: 3.5dvh !important;
+    top: 84.5%;
+}
+
+/* 9. SKILLS E EVOLUÇÃO
+   Estilização da área de habilidades e barra de XP da carta */
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 2dvh;
+    padding: 1dvh;
+    background: rgba(165, 224, 67, 0.1);
+    border-bottom: 1px solid rgba(165, 224, 67, 0.3);
+}
+
+.skill-icon-circle {
+    width: 3.5dvh;
+    height: 3.5dvh;
+    border-radius: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Garante que a imagem dentro do círculo diminua junto */
+.skill-icon-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Ajusta o tamanho da fonte da descrição para combinar */
+.skill-text {
+    font-size: 1.65dvh;
+    line-height: 1.2;
+}
+
+.skill-text strong {
+    margin-right: 1.5dvw;
+    /* Espaço após o "AO ATACAR", por exemplo */
+    color: #a5e043;
+    /* Opcional: destaca o gatilho da habilidade */
+}
+
+.info-upgrade-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3dvh;
+    width: 100%;
+    margin-bottom: 1dvh;
+}
+
+.info-upgrade-bar-bg {
+    width: 100%;
+    height: 1.4dvh;
+    background: #222;
+    border: 0.2dvh solid #a5e043;
+    border-radius: 1dvh;
+    overflow: hidden;
+}
+
+#info-upgrade-fill {
+    height: 100%;
+    background: #a5e043;
+    width: 0%;
+    transition: width 0.4s ease-out;
+}
+
+/* 10. FILTROS E DROPDOWNS
+    Interface de busca e organização estilo Scouter */
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 1dvw;
+    margin: 1vh 2vw;
+}
+
+.btn-scouter-filter {
+    position: static !important;
+    flex: 1;
+    background: rgba(165, 224, 67, 0.15);
+    border: 0.2dvw solid #a5e043;
+    color: #a5e043;
+    padding: 0.8vh 0.2vw;
+    font-family: 'digital-7', sans-serif;
+    font-size: 2.2dvw;
+    border-radius: 0.8dvw;
+    text-align: center;
+}
+
+/* 2. MENU DE FILTROS */
+#filter-dropdown,
+.dropdown-scouter {
+    position: absolute !important;
+    z-index: 9999;
+    left: 5dvw !important;
+    width: 90dvw !important;
+    transform: none !important; 
+    top: 100%; 
+    background: rgba(5, 20, 5, 0.98);
+    border: 0.2dvw solid #a5e043;
+    border-radius: 1.5dvw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2dvh;
+    padding: 1.5dvh;
+    max-height: 60dvh;
+    overflow-y: auto;
+}
+
+/* 3. ESTILO DAS OPÇÕES */
+.dropdown-option {
+    color: #a5e043;
+    font-family: 'digital-7';
+    font-size: 3.5dvw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid rgba(165, 224, 67, 0.1);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.dropdown-option img {
+    height: 4.5dvh;
+    width: auto;
+}
+
+/* --- COLUNAS POR TIPO (USANDO GRID PARA PRECISÃO) --- */
+
+/* RARIDADE e CLASSE (3 Colunas) */
+#filter-dropdown.filter-raridade,
+#filter-dropdown.filter-classe {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+}
+#filter-dropdown.filter-raridade .dropdown-option,
+#filter-dropdown.filter-classe .dropdown-option {
+    height: 8dvh;
+}
+
+/* SAGA e ORDENAR (2 Colunas) */
+#filter-dropdown.filter-saga,
+#filter-dropdown.filter-ordenar {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+}
+#filter-dropdown.filter-saga .dropdown-option,
+#filter-dropdown.filter-ordenar .dropdown-option {
+    height: 8dvh; /* Corrigido de 40dvh */
+}
+
+/* SKILLS (5 Colunas) */
+#filter-dropdown.filter-skills {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr);
+}
+#filter-dropdown.filter-skills .dropdown-option {
+    height: 6dvh;
+}
+
+/* 11. BOTÕES DE AÇÃO
+   Cores específicas para ações de adicionar (verde) ou remover (vermelho) */
+.info-buttons-row {
+    display: flex;
+    gap: 2dvh;
+    width: 100%;
+}
+
+.btn-info-action {
+    flex: 1;
+    padding: 1dvh 0;
+    border-radius: 1dvh;
+    font-family: 'digital-7', sans-serif;
+    font-size: 2.2dvh;
+    color: white;
+    border: 0.2dvh solid rgba(0, 0, 0, 0.5);
+}
+
+.btn-info-action.use.use-add {
+    background: #1a4d1a !important;
+}
+
+.btn-info-action.use.use-remove {
+    background: #c62828 !important;
+}
+
+/* Estados do botão de evolução */
+.btn-info-action.evolve.disabled {
+    background: #333 !important;
+    color: #666 !important;
+    cursor: not-allowed;
+}
+
+.btn-info-action.evolve.ready {
+    background: #4CAF50 !important;
+    box-shadow: 0 0 15px #a5e043;
+}
+
+/* --- COMPONENTES DINÂMICOS (GERADOS PELO JS) --- */
+
+/* O balão que aparece ao clicar na carta na grade */
+.card-action-popup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8dvh;
+    background: rgba(5, 20, 5, 0.95);
+    border: 0.3dvw solid #a5e043;
+    padding: 1.2dvh 1.5dvw;
+    border-radius: 1.5dvw;
+    z-index: 1000;
+    box-shadow: 0 0 2dvw rgba(0, 0, 0, 0.8);
+}
+
+/* Botões dentro do balão de ação */
+.btn-popup-action {
+    font-family: 'digital-7', sans-serif;
+    padding: 1dvh 2dvw;
+    border: none;
+    border-radius: 1dvw;
+    color: white;
+    cursor: pointer;
+    font-size: 2.8dvw;
+    /* Ajustado para leitura no mobile */
+    text-transform: uppercase;
+}
+
+.btn-popup-action.info {
+    background: #78ab27;
+}
+
+.btn-popup-action.add {
+    background: #2e7d32;
+}
+
+.btn-popup-action.remove {
+    background: #c62828;
+}
+
+/* Barrinha de Upgrade embaixo de cada carta */
+.upgrade-bar-external {
+    width: 100%;
+    height: 1.5dvh;
+    background: #111;
+    border: 0.15dvw solid #444;
+    border-radius: 1dvh;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.5dvh;
+}
+
+.upgrade-fill {
+    height: 100%;
+    background: #555;
+    transition: width 0.3s ease;
+}
+
+.upgrade-fill.ready {
+    background: #a5e043;
+    box-shadow: 0 0 1.2dvw #a5e043;
+}
+
+.upgrade-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    font-size: 1.2dvh;
+    /* Tamanho baseado na altura da barrinha */
+    color: white;
+    font-weight: bold;
+    line-height: 1.5dvh;
+    text-shadow: 0.1dvh 0.1dvh 0.1dvh black;
+}
+
+.info-details-box {
+    flex: 1;
+    /* Faz ela ocupar o resto do espaço disponível */
+    width: 100%;
+    overflow-y: auto;
+    /* Se o texto for grande, ele cria scroll */
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 1dvw;
+    padding: 1dvh;
+}
+
+.info-sidebar {
+    position: absolute;
+    left: 2dvw;
+    top: 10dvh;
+    display: flex;
+    flex-direction: column;
+    /* Empilha os botões */
+    gap: 1.5dvh;
+    z-index: 5100;
+}
+
+.sidebar-tab {
+    width: 9dvw;
+    height: 9dvw;
+    border-radius: 50%;
+    /* Círculos perfeitos */
+    background: transparent;
+    /* Remove o fundo sólido */
+    border: 0.4dvw solid #a5e043;
+    /* Borda neon verde */
+    color: #a5e043;
+    /* Texto verde */
+    font-family: 'digital-7', sans-serif;
+    /* Fonte Scouter */
+    font-size: 5dvw;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-shadow: 0 0 1dvw #a5e043;
+    /* Brilho no texto */
+    box-shadow: inset 0 0 1.5dvw rgba(165, 224, 67, 0.3);
+    /* Brilho interno leve */
+    transition: all 0.2s ease;
+}
+
+/* Estado ativo/clicado (preenche o fundo com verde claro) */
+.sidebar-tab.active {
+    background: rgba(165, 224, 67, 0.2);
+    box-shadow: 0 0 2dvw #a5e043, inset 0 0 1dvw #a5e043;
+}
+
+/* Cores diferentes para os novos botões */
+.sidebar-tab.special {
+    background: #f44336;
+    box-shadow: 0 0.5dvh 0 #b71c1c;
+}
+
+.sidebar-tab.info {
+    background: #2196f3;
+    box-shadow: 0 0.5dvh 0 #0d47a1;
+}
+
+#info-saga-logo {
+    /* Define o tamanho baseado na altura da tela (dvh) */
+    height: 6dvh;
+    width: auto;
+    /* Mantém a proporção da imagem */
+
+    /* Centralização e respiro */
+    display: block;
+    margin: 1.5dvh auto;
+
+    /* Filtro opcional para dar brilho e destacar no fundo escuro */
+    filter: drop-shadow(0 0 0.5dvh rgba(255, 255, 255, 0.5));
+}
+
+#info-bio-text {
+    font-size: 1.7dvh;
+    line-height: 1.2;
+    max-height: 14dvh;
+    /* Limita a altura do texto */
+    overflow-y: auto;
+    /* Adiciona scroll se a bio for muito longa */
+    margin-bottom: 1.5dvh;
+}
+
+.no-skills-message {
+    /* 1. CENTRALIZAÇÃO TOTAL */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    /* Faz ocupar todo o espaço da caixa */
+    min-height: 20dvh;
+    /* Garante um espaço mínimo */
+
+    /* 2. FONTE BASEADA EM DVH */
+    font-family: 'VerdanaPro-CondBlack', sans-serif;
+    font-size: 3.5dvh;
+    /* Tamanho proporcional à altura */
+
+    /* 3. ESTILO */
+    color: #a5e043;
+    text-transform: uppercase;
+    text-shadow: 0 0 1dvh rgba(165, 224, 67, 0.6);
+}
+
+#info-upgrade-label {
+    display: block;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+
+    /* FONTE BASEADA EM DVH */
+    font-size: 2.2dvh;
+
+    /* ESPAÇAMENTO */
+    margin-bottom: 0.5dvh;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* FILTRO DE RARIDADE
+
+/* Ajusta o tamanho da imagem do ícone (ex: D+, E+) */
+.filter-icon {
+    /* Define o tamanho baseado na largura da tela (dvw) */
+    width: 6dvw;
+    height: auto;
+    /* Mantém a proporção da imagem */
+
+    /* Centralização horizontal */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Ajusta o botão que contém o ícone */
+.filter-btn {
+    /* Remove o padding padrão para dar mais espaço */
+    padding: 1.5dvw;
+
+    /* Define uma altura mínima para o botão */
+    min-height: 10dvh;
+
+    /* Garante que o ícone fique centralizado no botão */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Outros estilos para combinar com o visual */
+    background: transparent;
+    border: 0.4dvw solid transparent;
+    /* Borda invisível por padrão */
+    border-radius: 1.5dvw;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Estilo para quando o botão de filtro estiver ativo */
+.filter-btn.active {
+    border-color: #a5e043;
+    /* Borda neon verde */
+    background: rgba(165, 224, 67, 0.1);
+    /* Fundo leve verde */
+    box-shadow: 0 0 1.5dvw rgba(165, 224, 67, 0.4);
+    /* Brilho neon */
+}
