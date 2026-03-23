@@ -1,47 +1,50 @@
 /* --- JS/rewards.js REFORMULADO --- */
 
-window.processResgate = function(id_capsule) {
-    const capsulaValida = ["01", "02", "03", "04"].includes(id_capsule);
+/* --- JS/rewards.js AJUSTADO --- */
 
-    if (capsulaValida) {
-        fetch('JSONs/capsules_data.json')
-            .then(response => response.json())
-            .then(data => {
-                const capsuleData = data[id_capsule];
+window.processResgate = async function(id_capsule) {
+    try {
+        // Converte para string e garante que tenha 2 dígitos (ex: 1 vira "01")
+        const idString = String(id_capsule).padStart(2, '0');
+        
+        const response = await fetch('JSONs/capsules_data.json');
+        const data = await response.json();
+        
+        // Se o seu JSON for um Array, usamos .find. Se for Objeto, usamos data[idString]
+        const capsuleData = Array.isArray(data) 
+            ? data.find(c => String(c.id).padStart(2, '0') === idString)
+            : data[idString];
 
-                if (capsuleData) {
-                    // Sorteio de Zenis
-                    const zenisSorted = Math.floor(Math.random() * (capsuleData.zenis.max - capsuleData.zenis.min + 1)) + capsuleData.zenis.min;
-                    // Sorteio de Senzus
-                    const senzusSorted = Math.floor(Math.random() * (capsuleData.senzus.max - capsuleData.senzus.min + 1)) + capsuleData.senzus.min;
+        if (!capsuleData) {
+            console.error('ID da cápsula não encontrado:', idString);
+            alert("Erro: Dados da cápsula não localizados.");
+            return;
+        }
 
-                    const rewardsQueue = [];
+        // Ajustando para os nomes de campos do SEU JSON: coins e senzu
+        const minCoins = capsuleData.coins ? capsuleData.coins[0] : 0;
+        const maxCoins = capsuleData.coins ? capsuleData.coins[1] : 0;
+        const minSenzu = capsuleData.senzu ? capsuleData.senzu[0] : 0;
+        const maxSenzu = capsuleData.senzu ? capsuleData.senzu[1] : 0;
 
-                    // Adiciona Zeni na fila se ganhou
-                    if (zenisSorted > 0) {
-                        rewardsQueue.push({ type: 'zeni', value: zenisSorted, icon: 'imgs/home/icon-zeni.png' });
-                    }
-                    // Adiciona Senzu na fila se ganhou
-                    if (senzusSorted > 0) {
-                        rewardsQueue.push({ type: 'senzu', value: senzusSorted, icon: 'imgs/home/icon-senzu.png' });
-                    }
+        const zenisSorted = Math.floor(Math.random() * (maxCoins - minCoins + 1)) + minCoins;
+        const senzusSorted = Math.floor(Math.random() * (maxSenzu - minSenzu + 1)) + minSenzu;
 
-                    // Se não ganhou nada (o que não deve acontecer com esses dados, mas por segurança)
-                    if (rewardsQueue.length === 0) {
-                        alert("Cápsula Vazia! Que azar...");
-                        return;
-                    }
+        const rewardsQueue = [];
+        if (zenisSorted > 0) {
+            rewardsQueue.push({ type: 'zeni', value: zenisSorted, icon: 'assets/elements/coins.webp' });
+        }
+        if (senzusSorted > 0) {
+            rewardsQueue.push({ type: 'senzu', value: senzusSorted, icon: 'assets/elements/senzu.webp' });
+        }
 
-                    // Inicia a sequência de animação
-                    startScatterSequence(capsuleData.name, rewardsQueue);
-                    
-                } else {
-                    console.error('Dados da cápsula não encontrados para o ID:', id_capsule);
-                }
-            })
-            .catch(error => console.error('Erro ao carregar o JSON das cápsulas:', error));
-    } else {
-        alert("ID de cápsula inválido!");
+        // Se o seu JSON tem o nome da cápsula como "nome" (em português)
+        const nomeCapsula = capsuleData.nome || capsuleData.name || "Cápsula";
+
+        startScatterSequence(nomeCapsula, rewardsQueue);
+        
+    } catch (error) {
+        console.error('Erro ao processar resgate:', error);
     }
 }
 
