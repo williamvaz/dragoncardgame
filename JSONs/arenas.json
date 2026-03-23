@@ -2,7 +2,7 @@
   {
     "Arena": 1,
     "Nome": "Arena Budokai",
-    "Trofeus minimos": 0,
+    "Trofeus minimos": -1,
     "Trofeus maximos": 499,
     "Desbloqueavel 1": 2, "Desbloqueavel 2": 20, "Desbloqueavel 3": 6, "Desbloqueavel 4": 5, "Desbloqueavel 5": 19,
     "Desbloqueavel 6": 6, "Desbloqueavel 7": 5, "Desbloqueavel 8": 8, "Desbloqueavel 9": 1, "Desbloqueavel 10": 15,
