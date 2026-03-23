@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         // 1. CARREGAMENTO DUPLO: Arenas e Personagens
         const [arenasRes, charsRes] = await Promise.all([
-            fetch('JSONs/arenas.JSON'),
+            fetch('JSONs/arenas.json'),
             fetch('JSONs/characters.json')
         ]);
         

@@ -306,12 +306,27 @@ function updateUseButtonState(char) {
 function performUpgrade(id) {
     let u = JSON.parse(localStorage.getItem("user_cards")) || [];
     let idx = u.findIndex(c => c.id === parseInt(id));
+    
     if (idx !== -1) {
         let c = u[idx];
-        c.cards -= Math.pow(2, c.level); // Gasta as cartas necessárias
-        c.level++; // Sobe o nível
-        localStorage.setItem("user_cards", JSON.stringify(u));
-        location.reload(); // Recarrega a página para atualizar status e visuais
+        let need = Math.pow(2, c.level);
+        
+        if (c.cards >= need) {
+            c.cards -= need; // Gasta as cartas
+            c.level++;       // Sobe o nível
+            
+            // Salva os novos dados
+            localStorage.setItem("user_cards", JSON.stringify(u));
+            
+            // --- ATUALIZAÇÃO EM TEMPO REAL ---
+            renderCollection();      // Atualiza a grade de "Todas as Cartas"
+            updateDeckUI();          // Atualiza o Deck no topo
+            updateCollectionTopBar(); // Atualiza XP/Moedas se necessário
+            
+            // Fecha o popup ou reabre para mostrar os novos stats
+            const charObj = allCharacters.find(char => parseInt(char.ID) === parseInt(id));
+            if (charObj) openInfoPopup(charObj); 
+        }
     }
 }
 
@@ -457,7 +472,6 @@ function equipToDeck(c) {
     if (d.length < 12) { d.push(c); localStorage.setItem("user_deck", JSON.stringify(d)); updateDeckUI(); }
 }
 
-// Atualiza os slots visuais do deck (grade superior)
 // Atualiza os slots visuais do deck (grade superior)
 function updateDeckUI() {
     const dck = JSON.parse(localStorage.getItem("user_deck")) || [];
