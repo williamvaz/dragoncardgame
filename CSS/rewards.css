@@ -1,140 +1,147 @@
-/* --- CSS/rewards.css --- */
+/* --- CSS/rewards.css REFORMULADO --- */
+
+:root {
+    --primary-color-rewards: #66ff33;
+}
+
+@font-face {
+    font-family: 'digital-7';
+    src: url('../fonts/digital-7.ttf') format('truetype');
+}
 
 .reward-overlay {
     position: fixed;
-    top: 0; 
+    top: 0;
     left: 0;
-    width: 100dvw; 
+    width: 100dvw;
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.97); /* Fundo quase opaco para foco total */
+    background-color: rgba(0, 0, 0, 0.98); /* Fundo bem escuro */
+    z-index: 9999;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    z-index: 5000;
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden; /* Importante para o espalhamento */
+    font-family: 'digital-7', sans-serif;
 }
 
-.reward-title {
-    font-family: 'digital-7' !important;
-    color: #a5e043;
-    font-size: 10dvw;
+#reward-title {
+    color: var(--primary-color-rewards);
+    font-size: 5dvw;
+    text-shadow: 0 0 10px var(--primary-color-rewards);
     margin-bottom: 5dvh;
-    text-align: center;
-    width: 100dvw;
-    text-shadow: 0 0 3dvw rgba(165, 224, 67, 0.6);
+    text-transform: uppercase;
+    animation: text-pulse 1.5s infinite;
 }
 
-#anim-stage {
+.capsule-container {
     position: relative;
-    width: 100dvw;
-    height: 50dvh;
+    width: 40dvw;
+    height: 40dvw;
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* CARD DE ITEM CENTRALIZADO COM POSICIONAMENTO ABSOLUTO NO CENTRO DO PALCO */
-.reward-card-pop {
-    background: linear-gradient(135deg, #1a251a 0%, #000 100%);
-    border: 0.6dvw solid #a5e043;
-    border-radius: 4dvw;
-    padding: 4dvh 6dvw;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 8dvw rgba(165, 224, 67, 0.3);
-    animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    position: absolute;
-    z-index: 50;
 }
 
-/* ANIMAÇÕES DA CÁPSULA */
-.capsule-anim-container.shake {
-    animation: shake-capsule 0.1s infinite;
+#reward-capsule {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
 }
 
-.capsule-anim-container.explode {
+/* Estado Tremendo */
+#reward-capsule.shake {
+    animation: shake-capsule 0.2s infinite;
+}
+
+/* Estado de Explosão */
+#reward-capsule.explode {
     animation: explode-capsule 0.5s forwards;
 }
 
+/* --- Container para os itens que vão voar --- */
+.rewards-items-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Deixa os cliques passarem */
+}
+
+/* --- Estilo Base para QUALQUER item de recompensa (moeda, semente, carta) --- */
+.reward-item {
+    position: absolute; /* Importante para mover do centro */
+    opacity: 0;
+    width: 15dvw; /* Tamanho final */
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+}
+
+/* --- Classe que ativa a animação de voo --- */
+.reward-item.fly {
+    animation: scatter-fly 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* --- Estilo específico para moedas e sementes (redondos) --- */
+.reward-icon {
+    width: 10dvw;
+    height: 10dvw;
+    border-radius: 50%;
+}
+
+/* --- Animações --- */
+
 @keyframes shake-capsule {
-    0% { transform: translate(0.5dvw, 0.5dvh); }
-    50% { transform: translate(-0.5dvw, -0.5dvh); }
-    100% { transform: translate(0.5dvw, 0.5dvh); }
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    100% { transform: translate(1px, -2px) rotate(0deg); }
 }
 
 @keyframes explode-capsule {
-    0% { transform: scale(1); filter: brightness(1); }
-    50% { transform: scale(1.6); filter: brightness(10); opacity: 1; }
-    100% { transform: scale(2.2); opacity: 0; }
+    0% { transform: scale(1); opacity: 1; filter: brightness(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)); }
+    50% { transform: scale(1.4); opacity: 1; filter: brightness(3) drop-shadow(0 0 30px #fff); }
+    100% { transform: scale(0.2); opacity: 0; filter: brightness(5) drop-shadow(0 0 10px #fff); }
 }
 
-@keyframes pop-item {
-    0% { transform: scale(0) translateY(10dvh); opacity: 0; }
-    100% { transform: scale(1) translateY(0); opacity: 1; }
+/* Animação Principal de Espalhamento */
+@keyframes scatter-fly {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.1) rotate(0deg); /* Começa no centro, pequeno */
+    }
+    10% {
+        opacity: 1; /* Aparece rápido */
+    }
+    100% {
+        opacity: 1;
+        /* Variáveis CSS que vamos definir no JS para cada item ter uma rota diferente */
+        transform: translate(var(--fly-x), var(--fly-y)) scale(1) rotate(var(--fly-rotate));
+    }
 }
 
-.reward-val-text {
-    font-family: 'digital-7' !important;
-    font-size: 12dvw;
-    color: #fff;
-    margin-top: 2dvh;
+@keyframes text-pulse {
+    0% { opacity: 0.8; text-shadow: 0 0 5px var(--primary-color-rewards); }
+    50% { opacity: 1; text-shadow: 0 0 15px var(--primary-color-rewards); }
+    100% { opacity: 0.8; text-shadow: 0 0 5px var(--primary-color-rewards); }
 }
 
-.step-counter {
-    color: #a5e043;
-    font-family: 'digital-7';
-    font-size: 4dvw;
-    margin-top: 2dvh;
-}
-
-/* GRID FINAL DE RESUMO */
-.final-grid {
-    display: flex;
-    gap: 5dvw;
-    margin-bottom: 6dvh;
-    justify-content: center;
-}
-
-.mini-card {
-    background: rgba(18, 24, 28, 0.9);
-    border: 0.4dvw solid #a5e043;
-    border-radius: 3dvw;
-    width: 28dvw;
-    height: 15dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.mini-card img { height: 6dvh; margin-bottom: 1dvh; }
-.mini-card span { font-family: 'digital-7'; color: #fff; font-size: 6dvw; }
-
-.btn-reward-close {
-    background: #a5e043;
-    color: #000;
-    font-family: 'digital-7' !important;
-    border: none;
-    padding: 2dvh 15dvw;
-    font-size: 7dvw;
-    border-radius: 2dvw;
-    font-weight: bold;
-    box-shadow: 0 0 4dvw rgba(165, 224, 67, 0.4);
-}
-
-.tap-instruction {
-    color: #a5e043;
-    font-family: 'digital-7';
-    font-size: 5dvw;
-    margin-top: 4dvh;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+#reward-counter {
+    position: absolute;
+    bottom: 10dvh;
+    color: white;
+    font-size: 3dvw;
+    display: none; /* Escondido por enquanto */
 }
