@@ -487,8 +487,6 @@ function updateDeckUI() {
                     
                     <div class="card-text-element layer-atk">${realATK}</div>
                     <div class="card-text-element layer-hp">${realHP}</div>
-                    
-                    <div class="card-text-element layer-level">${lvl}</div>
                     <div class="card-text-element layer-name">${char.nome}</div>
                     <div class="card-text-element layer-cost">${char.custo}</div>
                 </div>`;
