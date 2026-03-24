@@ -1,5 +1,12 @@
 /* --- CSS/rewards.css --- */
 
+@font-face {
+    font-family: 'VerdanaPro-CondBlack';
+    src: url('../assets/fonts/VerdanaPro-CondBlack.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .reward-overlay {
     position: fixed;
     top: 0; 
@@ -29,7 +36,7 @@
 #anim-stage {
     position: relative;
     width: 100dvw;
-    height: 70dvh; /* Aumentado para caber a carta inteira */
+    height: 70dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,20 +45,17 @@
 /* --- O NOVO CARD COM TEMPLATE --- */
 .reward-card-pop {
     position: absolute;
-    width: 80dvw;
-    height: 110dvw; /* Proporção de carta */
+    width: 60dvw;
+    height: 82.5dvw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     z-index: 50;
-    
-    /* CAMINHO DA IMAGEM: Ajustado para subir uma pasta e entrar em pictures */
     background-image: url('../pictures/template/itens.webp'); 
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
     animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
@@ -61,7 +65,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 4dvh;
+    margin-top: 5dvh;
 }
 
 .card-item-art {
@@ -71,32 +75,43 @@
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
+/* Efeito Especial para Esferas */
+.esfera-glow {
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)) !important;
+    animation: esfera-pulse 2s infinite ease-in-out;
+}
+
+@keyframes esfera-pulse {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 25px rgba(255, 165, 0, 1)); transform: scale(1.05); }
+}
+
+/* O Valor Numérico (+55 ou NOVA) */
 .reward-val-text {
-    font-family: 'Arial Black', Gadget, sans-serif !important;
-    font-size: 11dvw;
-    color: #fff;
-    margin: 0;
-    line-height: 1;
-    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-}
-
-.reward-item-name {
-    font-family: 'Arial', sans-serif !important;
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 8.5dvw; /* Leve redução para garantir respiro */
     font-weight: 900;
-    font-size: 6dvw;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 8px;
-    text-shadow: 2px 2px 0 #000;
+    background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.15dvh #000; 
+    margin: 0;
 }
 
-.step-counter {
-    position: absolute;
-    bottom: 6dvw; /* Posicionado sobre a base do template */
-    color: #a5e043;
-    font-family: 'digital-7' !important;
-    font-size: 5dvw;
+/* O Nome do Item (ZENIS ou Nome do Dragão) */
+.reward-item-name {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 4dvw; /* Reduzido para comportar nomes como "Shenlong da Fumaça Negra" */
+    font-weight: 900;
+    text-align: center;
+    width: 90%; /* Limita a largura para não vazar da carta */
+    background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1dvh #000;
+    margin-top: 2px;
 }
 
 /* --- ANIMAÇÕES CÁPSULA E FUMAÇA --- */
@@ -147,27 +162,123 @@
 }
 
 /* --- FINALIZAÇÃO --- */
-.final-grid { display: flex; gap: 5dvw; margin-bottom: 4dvh; justify-content: center; }
-.mini-card {
-    background: rgba(18, 24, 28, 0.9);
-    border: 0.4dvw solid #a5e043;
-    border-radius: 3dvw;
-    width: 32dvw; height: 16dvh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+
+.final-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 2dvw;
+    width: 95dvw;
+    margin-bottom: 4dvh;
+    padding: 2dvw;
+    justify-items: center;
 }
-.mini-card img { height: 7dvh; margin-bottom: 1dvh; }
-.mini-card span { font-family: 'digital-7'; color: #fff; font-size: 6dvw; }
+
+.mini-reward-card {
+    width: 17dvw; 
+    height: 24dvw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../pictures/template/itens.webp'); 
+    background-size: 100% 100%;
+    position: relative;
+    border-radius: 1dvw;
+    box-shadow: 0.5dvw 0.5dvw 1dvw rgba(0,0,0,0.5);
+}
+
+.mini-card-art {
+    width: 70%;
+    height: 50%;
+    object-fit: contain;
+    margin-top: 1dvh;
+}
+
+.mini-card-val {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 3.2dvw;
+    color: #fff;
+    -webkit-text-stroke: 0.1dvw #000;
+    margin-top: 0.5dvh;
+}
+
+.mini-card-name {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 1.8dvw;
+    color: #fff;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.05dvw #000;
+    margin-top: 0.2dvh;
+}
 
 .btn-reward-close {
-    background: #a5e043; color: #000;
+    background: #a5e043; 
+    color: #000;
     font-family: 'digital-7' !important;
-    border: none; padding: 2dvh 15dvw;
-    font-size: 7dvw; border-radius: 2dvw; font-weight: bold;
+    border: none; 
+    padding: 2dvh 15dvw;
+    font-size: 7dvw; 
+    border-radius: 2dvw; 
+    font-weight: bold;
 }
 
 .tap-instruction {
-    color: #a5e043; font-family: 'digital-7';
-    font-size: 5dvw; margin-top: 2dvh;
+    color: #a5e043; 
+    font-family: 'digital-7';
+    font-size: 5dvw; 
+    margin-top: 2dvh;
     animation: pulse 1.5s infinite;
 }
+
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* O INDICADOR DE ITENS RESTANTES (BADGE) */
+.items-remaining-badge {
+    position: absolute;
+    top: -2.5dvw;   
+    right: -2.5dvw; 
+    width: 12dvw;  
+    height: 14dvw; 
+    background: #1a1a1a;
+    border: 0.5dvw solid #a5e043;
+    border-radius: 2dvw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1dvw 1dvw 3dvw rgba(0,0,0,0.5);
+    z-index: 100;
+    transform: rotate(5deg);
+}
+
+/* ÍCONE MINIMALISTA DENTRO DA BADGE */
+.badge-icon-minimal {
+    width: 4dvw;   
+    height: 5.5dvw; 
+    border: 0.4dvw solid #a5e043;
+    border-radius: 0.8dvw;
+    position: relative;
+    background: transparent;
+    margin-bottom: 0.5dvh;
+}
+
+.badge-icon-minimal::before {
+    content: '';
+    position: absolute;
+    top: -0.8dvw;
+    right: -0.8dvw;
+    width: 100%;
+    height: 100%;
+    border: 0.4dvw solid #a5e043;
+    border-radius: 0.8dvw;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.badge-count {
+    font-family: 'digital-7' !important;
+    color: #a5e043;
+    font-size: 4dvw; 
+    font-weight: bold;
+    margin-top: -0.5dvh;
+}

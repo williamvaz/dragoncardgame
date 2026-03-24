@@ -1,0 +1,50 @@
+[
+  {
+    "Dragon": "Shenlong",
+    "Qtde Esferas": 7,
+    "Probabilidade": 38,
+    "ID": 1
+  },
+  {
+    "Dragon": "Porunga",
+    "Qtde Esferas": 7,
+    "Probabilidade": 32,
+    "ID": 2
+  },
+  {
+    "Dragon": "Torombo",
+    "Qtde Esferas": 2,
+    "Probabilidade": 5,
+    "ID": 3
+  },
+  {
+    "Dragon": "Shenlong Definitivo",
+    "Qtde Esferas": 7,
+    "Probabilidade": 13,
+    "ID": 4
+  },
+  {
+    "Dragon": "Shenlong da Fumaça Negra",
+    "Qtde Esferas": 7,
+    "Probabilidade": 6,
+    "ID": 5
+  },
+  {
+    "Dragon": "Porunga do Reino Demoniaco",
+    "Qtde Esferas": 3,
+    "Probabilidade": 2,
+    "ID": 6
+  },
+  {
+    "Dragon": "Super Shenlong",
+    "Qtde Esferas": 7,
+    "Probabilidade": 3,
+    "ID": 7
+  },
+  {
+    "Dragon": "Shenlong das Trevas",
+    "Qtde Esferas": 7,
+    "Probabilidade": 1,
+    "ID": 8
+  }
+]
