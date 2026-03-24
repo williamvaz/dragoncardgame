@@ -1,183 +1,176 @@
-/* --- JS/rewards.js REFORMULADO --- */
+/* --- JS/rewards.js --- */
 
-/* --- JS/rewards.js AJUSTADO --- */
-
-window.processResgate = async function(id_capsule) {
+async function processResgate(capsuleId) {
     try {
-        // Converte para string e garante que tenha 2 dígitos (ex: 1 vira "01")
-        const idString = String(id_capsule).padStart(2, '0');
-        
         const response = await fetch('JSONs/capsules_data.json');
         const data = await response.json();
-        
-        // Se o seu JSON for um Array, usamos .find. Se for Objeto, usamos data[idString]
-        const capsuleData = Array.isArray(data) 
-            ? data.find(c => String(c.id).padStart(2, '0') === idString)
-            : data[idString];
+        const info = data.find(c => c.id === parseInt(capsuleId));
 
-        if (!capsuleData) {
-            console.error('ID da cápsula não encontrado:', idString);
-            alert("Erro: Dados da cápsula não localizados.");
-            return;
+        if (!info) return;
+
+        // Sorteio de valores numéricos baseados no JSON
+        const ganhouCoins = Math.floor(Math.random() * (info.coins[1] - info.coins[0] + 1)) + info.coins[0];
+        const ganhouSenzus = Math.floor(Math.random() * (info.senzu[1] - info.senzu[0] + 1)) + info.senzu[0];
+
+        // Fila de exibição um a um
+        let queue = [
+            { type: 'coins', val: ganhouCoins, img: 'assets/elements/coins.webp' },
+            { type: 'senzus', val: ganhouSenzus, img: 'assets/elements/senzu.webp' }
+        ];
+
+        // Se houver cartas no JSON, adiciona um card informativo na fila
+        if (info.qtd) {
+            queue.push({ type: 'cartas', val: 'CARTAS', img: 'assets/menu_icons/colecao.webp' });
         }
 
-        // Ajustando para os nomes de campos do SEU JSON: coins e senzu
-        const minCoins = capsuleData.coins ? capsuleData.coins[0] : 0;
-        const maxCoins = capsuleData.coins ? capsuleData.coins[1] : 0;
-        const minSenzu = capsuleData.senzu ? capsuleData.senzu[0] : 0;
-        const maxSenzu = capsuleData.senzu ? capsuleData.senzu[1] : 0;
-
-        const zenisSorted = Math.floor(Math.random() * (maxCoins - minCoins + 1)) + minCoins;
-        const senzusSorted = Math.floor(Math.random() * (maxSenzu - minSenzu + 1)) + minSenzu;
-
-        const rewardsQueue = [];
-        if (zenisSorted > 0) {
-            rewardsQueue.push({ type: 'zeni', value: zenisSorted, icon: 'assets/elements/coins.webp' });
-        }
-        if (senzusSorted > 0) {
-            rewardsQueue.push({ type: 'senzu', value: senzusSorted, icon: 'assets/elements/senzu.webp' });
-        }
-
-        // Se o seu JSON tem o nome da cápsula como "nome" (em português)
-        const nomeCapsula = capsuleData.nome || capsuleData.name || "Cápsula";
-
-        startScatterSequence(nomeCapsula, rewardsQueue);
-        
-    } catch (error) {
-        console.error('Erro ao processar resgate:', error);
-    }
+        startOpeningSequence(info.nome, info.id, queue, { ganhouCoins, ganhouSenzus });
+    } catch (e) { console.error("Erro no resgate:", e); }
 }
 
-// Controla o estado da abertura (shake -> explode)
-let currentRewardState = 'idle'; 
-let rewardsItemsList = []; // Armazena os elementos HTML dos itens criados
+function startOpeningSequence(nome, imgId, queue, totais) {
+    const overlay = document.getElementById("reward-display-overlay");
+    if (!overlay) return;
 
-function startScatterSequence(title, rewards) {
-    const overlay = document.createElement('div');
-    overlay.className = 'reward-overlay';
+    // Título dinâmico puxado do JSON
     overlay.innerHTML = `
-        <h1 id="reward-title">${title}</h1>
-        <div class="capsule-container">
-            <img id="reward-capsule" src="imgs/rewards/capsule.webp" alt="Capsula">
-            <div class="rewards-items-container" id="items-container"></div> </div>
-    `;
-
-    document.body.appendChild(overlay);
-
-    const capsuleImg = document.getElementById('reward-capsule');
-    const itemsContainer = document.getElementById('items-container');
-    rewardsItemsList = []; // Reseta a lista
-
-    currentRewardState = 'idle';
-
-    // 1. Cria todos os elementos HTML dos itens, mas deixa invisíveis no centro
-    rewards.forEach((reward, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'reward-item';
-        
-        // Estilo específico se for ícone redondo (moeda/semente)
-        const isIcon = ['zeni', 'senzu'].includes(reward.type);
-        
-        itemDiv.innerHTML = `
-            <img src="${reward.icon}" class="${isIcon ? 'reward-icon' : ''}" alt="${reward.type}">
-            <div style="color:white; font-size:3dvw; margin-top:1dvh;">+${reward.value}</div>
-        `;
-
-        // --- CÁLCULO DE TRAJETÓRIA ALEATÓRIA (O SEGREDO DO EFEITO) ---
-        // Define para onde o item vai voar (X e Y) e quanto vai girar
-        // Usamos dvw/dvh para manter a responsividade
-        const flyX = (Math.random() - 0.5) * 60; // Voa entre -30dvw e +30dvw horizontalmente
-        const flyY = (Math.random() - 0.5) * 50 - 10; // Voa entre -35dvh e +15dvh verticalmente (mais para cima)
-        const flyRotate = (Math.random() - 0.5) * 720; // Gira entre -360 e +360 graus
-
-        // Define essas variáveis CSS diretamente no elemento
-        itemDiv.style.setProperty('--fly-x', `${flyX}dvw`);
-        itemDiv.style.setProperty('--fly-y', `${flyY}dvh`);
-        itemDiv.style.setProperty('--fly-rotate', `${flyRotate}deg`);
-        // Adiciona um pequeno atraso aleatório para não saírem exatamente juntos
-        itemDiv.style.animationDelay = `${Math.random() * 0.2}s`; 
-
-        itemsContainer.appendChild(itemDiv);
-        rewardsItemsList.push(itemDiv); // Guarda para ativar depois
-    });
-
-
-    // Controla os cliques no overlay
-    overlay.addEventListener('click', () => {
-        handleRewardClick(capsuleImg, overlay, rewards);
-    });
-}
-
-function handleRewardClick(capsuleImg, overlay, rewards) {
-    if (currentRewardState === 'idle') {
-        // Primeiro Clique: Começa a tremer
-        capsuleImg.classList.add('shake');
-        currentRewardState = 'shaking';
-    } else if (currentRewardState === 'shaking') {
-        // Segundo Clique: Explode e lança os itens
-        capsuleImg.classList.remove('shake');
-        capsuleImg.classList.add('explode');
-        currentRewardState = 'exploded';
-
-        // Ativa a animação de voo em todos os itens criados anteriormente
-        rewardsItemsList.forEach(item => {
-            item.classList.add('fly');
-        });
-
-        // Espera a animação de explosão e voo acabar para salvar e permitir fechar
-        setTimeout(() => {
-            showFinalSummary(overlay, rewards);
-        }, 1200); // 1.2s é tempo suficiente para as animações
-    } else if (currentRewardState === 'exploded') {
-        // Clique após a animação: Fecha tudo
-        finalizeRewards(overlay);
-    }
-}
-
-// Mostra o resumo final e salva os dados (mantendo sua lógica original)
-function showFinalSummary(overlay, rewards) {
-    let totalZeni = 0;
-    let totalSenzu = 0;
-
-    rewards.forEach(r => {
-        if (r.type === 'zeni') totalZeni += r.value;
-        if (r.type === 'senzu') totalSenzu += r.value;
-    });
-
-    // Chama sua função global para salvar no localStorage
-    if (window.addCurrency) {
-        if (totalZeni > 0) window.addCurrency('zeni', totalZeni);
-        if (totalSenzu > 0) window.addCurrency('senzu', totalSenzu);
-    }
-
-    const titleH1 = document.getElementById('reward-title');
-    titleH1.innerText = "RECOMPENSAS RESGATADAS";
-    titleH1.style.animation = "none"; // Para de pulsar
-
-    // Remove a cápsula explodida e os itens soltos para limpar a tela
-    document.getElementById('reward-capsule').remove();
-    document.getElementById('items-container').remove();
-
-    // Cria um container simples para o resumo (estilo antigo)
-    const summaryDiv = document.createElement('div');
-    summaryDiv.style.display = 'flex';
-    summaryDiv.style.flexDirection = 'column';
-    summaryDiv.style.alignItems = 'center';
-    summaryDiv.style.gap = '2dvh';
-    summaryDiv.innerHTML = `
-        <div style="font-size: 4dvw; color:white;">RESUMO:</div>
-        <div style="display:flex; gap: 5dvw; align-items:center;">
-            ${totalZeni > 0 ? `<div style="display:flex; align-items:center; gap:1dvw; color:white; font-size:3.5dvw;"><img src="imgs/home/icon-zeni.png" class="reward-icon" style="width:7dvw; height:7dvw;"> +${totalZeni}</div>` : ''}
-            ${totalSenzu > 0 ? `<div style="display:flex; align-items:center; gap:1dvw; color:white; font-size:3.5dvw;"><img src="imgs/home/icon-senzu.png" class="reward-icon" style="width:7dvw; height:7dvw;"> +${totalSenzu}</div>` : ''}
+        <h1 id="reward-title" class="reward-title">${nome}</h1>
+        <div id="anim-stage">
+            <div id="main-capsule" class="capsule-anim-container">
+                <img src="pictures/capsules/${imgId}.webp" style="width:40dvw">
+            </div>
         </div>
-        <div style="color:rgba(255,255,255,0.7); font-size:2.5dvw; margin-top:5dvh;">(Toque para fechar)</div>
+        <div id="tap-msg" class="tap-instruction">TOQUE PARA ABRIR</div>
     `;
+    overlay.style.display = "flex";
 
-    overlay.querySelector('.capsule-container').appendChild(summaryDiv);
-    currentRewardState = 'exploded'; // Mantém o estado para o próximo clique fechar
+    const capsule = document.getElementById("main-capsule");
+    let step = 0;
+
+    overlay.onclick = (e) => {
+        if (e.target.classList.contains('btn-reward-close')) return;
+
+        if (step === 0) {
+            // Inicia Trepidação
+            capsule.classList.add('shake');
+
+            setTimeout(() => {
+                // MUDANÇA AQUI: Inicia a Explosão E a Fumaça JUNTOS
+                capsule.classList.replace('shake', 'explode');
+
+                // --- NOVA LINHA ---
+                createCartoonSmokeEffect(); // CHAMA O EFEITO DE FUMAÇA
+                // -----------------
+
+                document.getElementById("tap-msg").innerText = "PRÓXIMO ITEM";
+                document.getElementById("reward-title").innerText = "ABRINDO..."; // Feedback visual
+                step++;
+                revealNextItem();
+            }, 600); // Mantive os 600ms de shake
+
+        } else if (step <= queue.length) {
+            revealNextItem();
+        } else {
+            showFinalSummary(totais);
+        }
+    };
+
+    function revealNextItem() {
+        const stage = document.getElementById("anim-stage");
+        const existing = stage.querySelector('.reward-card-pop');
+        if (existing) existing.remove();
+
+        const item = queue[step - 1];
+        const card = document.createElement('div');
+        card.className = 'reward-card-pop';
+        card.innerHTML = `
+            <img src="${item.img}" style="height:15dvh">
+            <span class="reward-val-text">+${item.val}</span>
+            <div class="step-counter">${step} / ${queue.length}</div>
+        `;
+        stage.appendChild(card);
+        step++;
+    }
 }
 
-function finalizeRewards(overlay) {
-    // Remove o overlay e volta para a Home
-    overlay.remove();
+function showFinalSummary(totais) {
+    const overlay = document.getElementById("reward-display-overlay");
+    overlay.onclick = null; // Trava cliques soltos para obrigar o uso do botão OK
+
+    // Adiciona moedas e senzus na economia (SEM ADICIONAR XP)
+    if (window.addCurrency) {
+        window.addCurrency('coins', totais.ganhouCoins);
+        window.addCurrency('senzus', totais.ganhouSenzus);
+    }
+
+    overlay.innerHTML = `
+        <h1 class="reward-title">COLETADO!</h1>
+        <div class="final-grid">
+            <div class="mini-card">
+                <img src="assets/elements/coins.webp">
+                <span>${totais.ganhouCoins}</span>
+            </div>
+            <div class="mini-card">
+                <img src="assets/elements/senzu.webp">
+                <span>${totais.ganhouSenzus}</span>
+            </div>
+        </div>
+        <button class="btn-reward-close" onclick="closeRewardScreen()">OK</button>
+    `;
+}
+
+// FUNÇÃO DE FECHAMENTO QUE RESOLVE O ERRO DE CONSOLE
+function closeRewardScreen() {
+    const overlay = document.getElementById("reward-display-overlay");
+    if (overlay) overlay.style.display = "none";
+}
+
+// --- JS/rewards.js (Adicionar ao final) ---
+
+function createCartoonSmokeEffect() {
+    const stage = document.getElementById("anim-stage");
+    if (!stage) return;
+
+    // 1. Cria o contêiner da fumaça
+    const smokeContainer = document.createElement('div');
+    smokeContainer.id = 'smoke-container';
+    stage.appendChild(smokeContainer);
+
+    // 2. Define quantas "bolhas" de fumaça queremos (estilo cartoon precisa de várias)
+    const numParticles = 15;
+
+    for (let i = 0; i < numParticles; i++) {
+        // 3. Cria a partícula
+        const particle = document.createElement('div');
+        particle.className = 'smoke-particle';
+
+        // 4. Gera valores aleatórios para a animação CSS (usando var(--))
+
+        // Direção: Faz a fumaça explodir para todos os lados (-100% a 100% da área)
+        const dx = (Math.random() - 0.5) * 200; // translate X
+        const dy = (Math.random() - 0.5) * 200; // translate Y
+
+        // Tamanho final: Algumas bolhas ficam grandes, outras menores (scale 1.5 a 4.0)
+        const finalScale = Math.random() * 2.5 + 1.5;
+
+        // Tamanho inicial da bolha (width/height): Aleatório entre 5dvw e 12dvw
+        const size = Math.random() * 7 + 5;
+
+        // 5. Aplica as variáveis CSS diretamente no elemento
+        particle.style.width = `${size}dvw`;
+        particle.style.height = `${size}dvw`;
+        particle.style.setProperty('--dx', `${dx}dvw`);
+        particle.style.setProperty('--dy', `${dy}dvw`);
+        particle.style.setProperty('--final-scale', finalScale);
+
+        // 6. Pequeno atraso aleatório para as bolhas não saírem todas EXATAMENTE juntas
+        particle.style.animationDelay = `${Math.random() * 0.2}s`;
+
+        // 7. Adiciona a partícula ao contêiner
+        smokeContainer.appendChild(particle);
+    }
+
+    // 8. Limpeza: Remove o contêiner inteiro depois que a animação acabar (1 segundo é seguro)
+    setTimeout(() => {
+        smokeContainer.remove();
+    }, 1000);
 }
