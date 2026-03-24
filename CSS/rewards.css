@@ -6,7 +6,7 @@
     left: 0;
     width: 100dvw; 
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.97); /* Fundo quase opaco para foco total */
+    background: rgba(0, 0, 0, 0.97);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,7 +20,7 @@
     font-family: 'digital-7' !important;
     color: #a5e043;
     font-size: 10dvw;
-    margin-bottom: 5dvh;
+    margin-bottom: 2dvh;
     text-align: center;
     width: 100dvw;
     text-shadow: 0 0 3dvw rgba(165, 224, 67, 0.6);
@@ -29,35 +29,104 @@
 #anim-stage {
     position: relative;
     width: 100dvw;
-    height: 50dvh;
+    height: 70dvh; /* Aumentado para caber a carta inteira */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CARD DE ITEM CENTRALIZADO COM POSICIONAMENTO ABSOLUTO NO CENTRO DO PALCO */
+/* --- O NOVO CARD COM TEMPLATE --- */
 .reward-card-pop {
-    background: linear-gradient(135deg, #1a251a 0%, #000 100%);
-    border: 0.6dvw solid #a5e043;
-    border-radius: 4dvw;
-    padding: 4dvh 6dvw;
+    position: absolute;
+    width: 80dvw;
+    height: 110dvw; /* Proporção de carta */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 8dvw rgba(165, 224, 67, 0.3);
-    animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    position: absolute;
+    justify-content: flex-start;
     z-index: 50;
+    
+    /* CAMINHO DA IMAGEM: Ajustado para subir uma pasta e entrar em pictures */
+    background-image: url('../pictures/template/itens.webp'); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* ANIMAÇÕES DA CÁPSULA */
-.capsule-anim-container.shake {
-    animation: shake-capsule 0.1s infinite;
+.card-art-container {
+    width: 100%;
+    height: 55%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4dvh;
 }
 
-.capsule-anim-container.explode {
-    animation: explode-capsule 0.5s forwards;
+.card-item-art {
+    max-height: 85%;
+    max-width: 85%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.reward-val-text {
+    font-family: 'Arial Black', Gadget, sans-serif !important;
+    font-size: 11dvw;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.reward-item-name {
+    font-family: 'Arial', sans-serif !important;
+    font-weight: 900;
+    font-size: 6dvw;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.step-counter {
+    position: absolute;
+    bottom: 6dvw; /* Posicionado sobre a base do template */
+    color: #a5e043;
+    font-family: 'digital-7' !important;
+    font-size: 5dvw;
+}
+
+/* --- ANIMAÇÕES CÁPSULA E FUMAÇA --- */
+.capsule-anim-container { position: relative; }
+.capsule-anim-container.shake { animation: shake-capsule 0.1s infinite; }
+.capsule-anim-container.explode { animation: explode-capsule 0.5s forwards; }
+
+#smoke-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20dvw; height: 20dvw;
+    z-index: 40;
+    pointer-events: none;
+}
+
+.smoke-particle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(5px);
+    opacity: 0;
+    animation: smoke-puff 0.8s ease-out forwards;
+    background-color: rgba(165, 224, 67, 0.6);
+    box-shadow: 0 0 20px rgba(165, 224, 67, 0.8);
+}
+
+@keyframes smoke-puff {
+    0% { transform: translate(0, 0) scale(0.1); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(var(--final-scale)); opacity: 0; }
 }
 
 @keyframes shake-capsule {
@@ -77,106 +146,28 @@
     100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.reward-val-text {
-    font-family: 'digital-7' !important;
-    font-size: 12dvw;
-    color: #fff;
-    margin-top: 2dvh;
-}
-
-.step-counter {
-    color: #a5e043;
-    font-family: 'digital-7';
-    font-size: 4dvw;
-    margin-top: 2dvh;
-}
-
-/* GRID FINAL DE RESUMO */
-.final-grid {
-    display: flex;
-    gap: 5dvw;
-    margin-bottom: 6dvh;
-    justify-content: center;
-}
-
+/* --- FINALIZAÇÃO --- */
+.final-grid { display: flex; gap: 5dvw; margin-bottom: 4dvh; justify-content: center; }
 .mini-card {
     background: rgba(18, 24, 28, 0.9);
     border: 0.4dvw solid #a5e043;
     border-radius: 3dvw;
-    width: 28dvw;
-    height: 15dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 32dvw; height: 16dvh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
-
-.mini-card img { height: 6dvh; margin-bottom: 1dvh; }
+.mini-card img { height: 7dvh; margin-bottom: 1dvh; }
 .mini-card span { font-family: 'digital-7'; color: #fff; font-size: 6dvw; }
 
 .btn-reward-close {
-    background: #a5e043;
-    color: #000;
+    background: #a5e043; color: #000;
     font-family: 'digital-7' !important;
-    border: none;
-    padding: 2dvh 15dvw;
-    font-size: 7dvw;
-    border-radius: 2dvw;
-    font-weight: bold;
-    box-shadow: 0 0 4dvw rgba(165, 224, 67, 0.4);
+    border: none; padding: 2dvh 15dvw;
+    font-size: 7dvw; border-radius: 2dvw; font-weight: bold;
 }
 
 .tap-instruction {
-    color: #a5e043;
-    font-family: 'digital-7';
-    font-size: 5dvw;
-    margin-top: 4dvh;
+    color: #a5e043; font-family: 'digital-7';
+    font-size: 5dvw; margin-top: 2dvh;
     animation: pulse 1.5s infinite;
 }
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
-/* --- CSS/rewards.css (Adicionar ao final) --- */
-
-/* Contêiner para agrupar as partículas de fumaça */
-#smoke-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centraliza no meio da cápsula */
-    width: 20dvw; /* Tamanho inicial pequeno */
-    height: 20dvw;
-    z-index: 40; /* Atrás do item que aparece, mas à frente da cápsula antiga */
-    pointer-events: none; /* Não atrapalha os cliques */
-}
-
-/* A partícula de fumaça individual */
-.smoke-particle {
-    position: absolute;
-    border-radius: 50%; /* Faz ser redonda */
-    filter: blur(5px); /* Dá um aspecto suave, de fumaça */
-    opacity: 0;
-    /* Define qual animação usar: 'puff', duração de 0.8s, suave, e fica no estado final */
-    animation: smoke-puff 0.8s ease-out forwards;
-    background-color: rgba(165, 224, 67, 0.6);
-    box-shadow: 0 0 20px rgba(165, 224, 67, 0.8);
-}
-
-@keyframes smoke-puff {
-    0% {
-        transform: translate(0, 0) scale(0.1); /* Começa no centro, minúscula */
-        opacity: 0;
-    }
-    15% {
-        opacity: 1; /* Aparece rápido */
-    }
-    100% {
-        /* O segredo: No final, cada partícula vai para uma direção aleatória */
-        /* (Isso será definido dinamicamente pelo JS) */
-        transform: translate(var(--dx), var(--dy)) scale(var(--final-scale));
-        opacity: 0; /* Some devagar */
-    }
-}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
