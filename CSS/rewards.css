@@ -7,6 +7,7 @@
     font-style: normal;
 }
 
+/* 1. OVERLAY PRINCIPAL */
 .reward-overlay {
     position: fixed;
     top: 0; 
@@ -21,8 +22,13 @@
     z-index: 5000;
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
+    /* Bloqueia arrastar e interações de sistema */
+    user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none;
 }
 
+/* 2. TÍTULOS E TEXTOS DE INSTRUÇÃO */
 .reward-title {
     font-family: 'digital-7' !important;
     color: #a5e043;
@@ -33,6 +39,17 @@
     text-shadow: 0 0 3dvw rgba(165, 224, 67, 0.6);
 }
 
+.tap-instruction {
+    color: #a5e043; 
+    font-family: 'digital-7';
+    font-size: 5dvw; 
+    margin-top: 2dvh;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* 3. PALCO DE ANIMAÇÃO (ABERTURA) */
 #anim-stage {
     position: relative;
     width: 100dvw;
@@ -42,7 +59,6 @@
     align-items: center;
 }
 
-/* --- O NOVO CARD COM TEMPLATE --- */
 .reward-card-pop {
     position: absolute;
     width: 60dvw;
@@ -59,6 +75,10 @@
     animation: pop-item 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+.reward-card-pop.card-frente-template {
+    background-image: url('../pictures/template/Frente.webp');
+}
+
 .card-art-container {
     width: 100%;
     height: 55%; 
@@ -66,6 +86,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 5dvh;
+    pointer-events: none;
 }
 
 .card-item-art {
@@ -73,23 +94,12 @@
     max-width: 85%;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    -webkit-user-drag: none;
 }
 
-/* Efeito Especial para Esferas */
-.esfera-glow {
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)) !important;
-    animation: esfera-pulse 2s infinite ease-in-out;
-}
-
-@keyframes esfera-pulse {
-    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6)); transform: scale(1); }
-    50% { filter: drop-shadow(0 0 25px rgba(255, 165, 0, 1)); transform: scale(1.05); }
-}
-
-/* O Valor Numérico (+55 ou NOVA) */
 .reward-val-text {
     font-family: 'VerdanaPro-CondBlack' !important;
-    font-size: 8.5dvw; /* Leve redução para garantir respiro */
+    font-size: 8.5dvw;
     font-weight: 900;
     background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
     -webkit-background-clip: text;
@@ -99,13 +109,12 @@
     margin: 0;
 }
 
-/* O Nome do Item (ZENIS ou Nome do Dragão) */
 .reward-item-name {
     font-family: 'VerdanaPro-CondBlack' !important;
-    font-size: 4dvw; /* Reduzido para comportar nomes como "Shenlong da Fumaça Negra" */
+    font-size: 4dvw;
     font-weight: 900;
     text-align: center;
-    width: 90%; /* Limita a largura para não vazar da carta */
+    width: 90%;
     background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -114,125 +123,7 @@
     margin-top: 2px;
 }
 
-/* --- ANIMAÇÕES CÁPSULA E FUMAÇA --- */
-.capsule-anim-container { position: relative; }
-.capsule-anim-container.shake { animation: shake-capsule 0.1s infinite; }
-.capsule-anim-container.explode { animation: explode-capsule 0.5s forwards; }
-
-#smoke-container {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20dvw; height: 20dvw;
-    z-index: 40;
-    pointer-events: none;
-}
-
-.smoke-particle {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(5px);
-    opacity: 0;
-    animation: smoke-puff 0.8s ease-out forwards;
-    background-color: rgba(165, 224, 67, 0.6);
-    box-shadow: 0 0 20px rgba(165, 224, 67, 0.8);
-}
-
-@keyframes smoke-puff {
-    0% { transform: translate(0, 0) scale(0.1); opacity: 0; }
-    15% { opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)) scale(var(--final-scale)); opacity: 0; }
-}
-
-@keyframes shake-capsule {
-    0% { transform: translate(0.5dvw, 0.5dvh); }
-    50% { transform: translate(-0.5dvw, -0.5dvh); }
-    100% { transform: translate(0.5dvw, 0.5dvh); }
-}
-
-@keyframes explode-capsule {
-    0% { transform: scale(1); filter: brightness(1); }
-    50% { transform: scale(1.6); filter: brightness(10); opacity: 1; }
-    100% { transform: scale(2.2); opacity: 0; }
-}
-
-@keyframes pop-item {
-    0% { transform: scale(0) translateY(10dvh); opacity: 0; }
-    100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-/* --- FINALIZAÇÃO --- */
-
-.final-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 2dvw;
-    width: 95dvw;
-    margin-bottom: 4dvh;
-    padding: 2dvw;
-    justify-items: center;
-}
-
-.mini-reward-card {
-    width: 17dvw; 
-    height: 24dvw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url('../pictures/template/itens.webp'); 
-    background-size: 100% 100%;
-    position: relative;
-    border-radius: 1dvw;
-    box-shadow: 0.5dvw 0.5dvw 1dvw rgba(0,0,0,0.5);
-}
-
-.mini-card-art {
-    width: 70%;
-    height: 50%;
-    object-fit: contain;
-    margin-top: 1dvh;
-}
-
-.mini-card-val {
-    font-family: 'VerdanaPro-CondBlack' !important;
-    font-size: 3.2dvw;
-    color: #fff;
-    -webkit-text-stroke: 0.1dvw #000;
-    margin-top: 0.5dvh;
-}
-
-.mini-card-name {
-    font-family: 'VerdanaPro-CondBlack' !important;
-    font-size: 1.8dvw;
-    color: #fff;
-    text-transform: uppercase;
-    -webkit-text-stroke: 0.05dvw #000;
-    margin-top: 0.2dvh;
-}
-
-.btn-reward-close {
-    background: #a5e043; 
-    color: #000;
-    font-family: 'digital-7' !important;
-    border: none; 
-    padding: 2dvh 15dvw;
-    font-size: 7dvw; 
-    border-radius: 2dvw; 
-    font-weight: bold;
-}
-
-.tap-instruction {
-    color: #a5e043; 
-    font-family: 'digital-7';
-    font-size: 5dvw; 
-    margin-top: 2dvh;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-/* O INDICADOR DE ITENS RESTANTES (BADGE) */
+/* 4. BADGE DE ITENS RESTANTES */
 .items-remaining-badge {
     position: absolute;
     top: -2.5dvw;   
@@ -251,7 +142,6 @@
     transform: rotate(5deg);
 }
 
-/* ÍCONE MINIMALISTA DENTRO DA BADGE */
 .badge-icon-minimal {
     width: 4dvw;   
     height: 5.5dvw; 
@@ -281,4 +171,289 @@
     font-size: 4dvw; 
     font-weight: bold;
     margin-top: -0.5dvh;
+}
+
+/* 5. RESUMO FINAL (GRADE COMPACTA) */
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90dvw;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid #a5e043;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(165, 224, 67, 0.4);
+}
+
+.final-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    max-height: 60dvh;
+    overflow-y: auto;
+}
+
+.mini-reward-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 5px;
+    position: relative;
+    border: 1px solid rgba(165, 224, 67, 0.2);
+    min-width: 80px; /* Garante que nunca fique menor que isso */
+    transition: transform 0.2s;
+}
+
+.item-art-container {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    position: relative;
+    margin-bottom: 6px;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #111;
+    pointer-events: none;
+}
+
+/* Camadas das Cartas no Grid */
+.item-art-container .char-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.item-art-container .layer-rarity {
+    position: absolute;
+    top: 6.1%;
+    left: 4.9%;
+    width: 21.2%;
+    z-index: 2;
+}
+
+.item-art-container .layer-template-front {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 5;
+    -webkit-user-drag: none;
+}
+
+/* Estilo para Recursos (Moedas, etc) */
+.resource-item .item-art-container {
+    aspect-ratio: 1 / 1;
+    background: transparent;
+}
+
+.resource-item .char-img {
+    object-fit: contain;
+    padding: 10%;
+}
+
+.item-name {
+    font-family: 'VerdanaPro-CondBlack';
+    font-size: 0.7em;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.card-info-compact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.received-count {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 2px;
+}
+
+.small-card-icon {
+    width: 10px; height: auto;
+}
+
+.received-val {
+    font-family: 'VerdanaPro-CondBlack';
+    font-size: 0.9em;
+    color: #a5e043;
+}
+
+/* 6. UPGRADES E BOTÃO COLETAR */
+.upgrade-badge {
+    position: absolute;
+    top: -5px; right: -5px;
+    background: #a5e043;
+    color: #000;
+    font-family: 'digital-7' !important;
+    font-size: 0.8em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    z-index: 20;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(165, 224, 67, 0.8);
+}
+
+.ready-upgrade {
+    border: 1px solid #a5e043 !important;
+    box-shadow: 0 0 15px rgba(165, 224, 67, 0.5) !important;
+}
+
+.btn-reward-close {
+    background: #a5e043; 
+    color: #000;
+    font-family: 'digital-7' !important;
+    border: none; 
+    padding: 2dvh 15dvw;
+    font-size: 7dvw; 
+    border-radius: 2dvw; 
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #6b942a;
+}
+
+.btn-reward-close:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #6b942a;
+}
+
+/* 7. ANIMAÇÕES TÉCNICAS */
+.capsule-anim-container.shake { animation: shake-capsule 0.1s infinite; }
+.capsule-anim-container.explode { animation: explode-capsule 0.5s forwards; }
+
+.smoke-particle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(5px);
+    opacity: 0;
+    animation: smoke-puff 0.8s ease-out forwards;
+    background-color: rgba(165, 224, 67, 0.6);
+}
+
+@keyframes smoke-puff {
+    0% { transform: translate(0, 0) scale(0.1); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(2); opacity: 0; }
+}
+
+@keyframes shake-capsule {
+    0%, 100% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, -2px); }
+}
+
+@keyframes explode-capsule {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.6); filter: brightness(10); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes pop-item {
+    0% { transform: scale(0) translateY(10dvh); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* 8. ADAPTIVIDADE MOBILE */
+@media (max-width: 480px) {
+    .final-grid-compact {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+/* --- CSS/rewards.css --- */
+
+/* Força o container de arte das mini-recompensas a respeitar o grid */
+.mini-reward-item .reward-art-wrapper {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    position: relative;
+    border-radius: 1dvw;
+    overflow: hidden;
+    background: #111;
+}
+
+/* FIX CRÍTICO: Isola as imagens para não herdarem tamanhos gigantes da coleção */
+.mini-reward-item .reward-art-wrapper img {
+    position: absolute;
+    display: block;
+    max-width: none; /* Remove restrições externas */
+    -webkit-user-drag: none;
+}
+
+/* Posicionamento das camadas idêntico à coleção, mas escalado pelo wrapper */
+.reward-card-unit .char-img {
+    top: 0; left: 0;
+    width: 100% !important; 
+    height: 100% !important;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.reward-card-unit .layer-rarity {
+    top: 6.1% !important;
+    left: 4.9% !important;
+    width: 21.2% !important;
+    z-index: 2;
+}
+
+.reward-card-unit .layer-template-front {
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 5;
+}
+
+/* Garante que os recursos (Moeda/Senzu) fiquem centralizados e pequenos */
+.resource-item .reward-art-wrapper {
+    aspect-ratio: 1 / 1;
+}
+
+.resource-img-fix {
+    width: 80% !important;
+    height: 80% !important;
+    top: 10% !important;
+    left: 10% !important;
+    object-fit: contain;
+}
+
+/* Container da arte: travando a proporção para não achatar */
+.reward-art-wrapper {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    position: relative;
+    border-radius: 1dvw;
+    overflow: hidden;
+    background: #111;
+}
+
+/* FIX DAS IMAGENS: Garante que ocupem 100% do wrapper mini */
+.reward-card-unit .char-img,
+.reward-card-unit .layer-rarity,
+.reward-card-unit .layer-template-front,
+.reward-card-unit .layer-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+/* Ajuste dos textos para serem proporcionais ao card mini */
+.reward-card-unit .card-text-element {
+    font-size: 10px !important; /* Use px aqui para evitar que suma */
+    -webkit-text-stroke: 0.5px black;
 }

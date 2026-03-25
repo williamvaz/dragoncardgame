@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const formatNumber = (num) => (num ?? 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // 2. ECONOMIA (MOEDAS E SENZUS)
-    const updatePlayerStats = () => {
+    window.updatePlayerStats = () => {
         const itens = JSON.parse(localStorage.getItem("user_itens")) || { coins: 0, senzus: 0 };
         const coinsEl = document.getElementById("user-coins");
         const senzusEl = document.getElementById("user-senzus");
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-    updatePlayerStats();
+    window.updatePlayerStats();
     updateEXP();
     await updateTrophyUI();
     updatePassUI();
@@ -106,8 +106,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    const btnFree = document.getElementById('btn-free-capsule');
+    if (btnFree) {
+        btnFree.addEventListener('click', () => {
+            if (typeof processResgate === 'function') processResgate(1);
+        });
+    }
+
     window.addEventListener('storage', async () => {
-        updatePlayerStats();
+        window.updatePlayerStats();
         updateEXP();
         await updateTrophyUI();
         updatePassUI();
