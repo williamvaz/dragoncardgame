@@ -189,7 +189,7 @@ async function setupFilterEvents() {
     // Definição das opções de cada filtro
     const raridades = [{ id: 'TODAS', nome: 'TODAS' }, { id: 'F', img: 'pictures/rarity/2.webp' }, { id: 'E', img: 'pictures/rarity/5.webp' }, { id: 'D', img: 'pictures/rarity/8.webp' }, { id: 'C', img: 'pictures/rarity/11.webp' }, { id: 'B', img: 'pictures/rarity/14.webp' }, { id: 'A', img: 'pictures/rarity/17.webp' }, { id: 'Z', img: 'pictures/rarity/20.webp' }];
     const sagas = [{ id: 'TODAS', nome: 'TODAS' }, ...sagasData.map(s => ({ id: s.Saga, nome: s.Saga, img: `pictures/sagas/${s.ID}.webp` }))];
-    const classes = [{ id: 'TODAS', nome: 'TODAS' }, { id: 'Alienigenas', img: 'pictures/classes/Alienígenas.webp' }, { id: 'Artificiais', img: 'pictures/classes/Artificiais.webp' }, { id: 'Celestiais', img: 'pictures/classes/Celestiais.webp' }, { id: 'Entidades', img: 'pictures/classes/Entidades.webp' }, { id: 'Multiversais', img: 'pictures/classes/Multiversais.webp' }, { id: 'Namekuseijins', img: 'pictures/classes/Namekuseijins.webp' }, { id: 'Saiyajins', img: 'pictures/classes/Saiyajins.webp' }, { id: 'Terraqueos', img: 'pictures/classes/Terráqueos.webp' }];
+    const classes = [{ id: 'TODAS', nome: 'TODAS' }, { id: 'Alienigenas', img: 'pictures/classes/Alienigenas.webp' }, { id: 'Artificiais', img: 'pictures/classes/Artificiais.webp' }, { id: 'Celestiais', img: 'pictures/classes/Celestiais.webp' }, { id: 'Entidades', img: 'pictures/classes/Entidades.webp' }, { id: 'Multiversais', img: 'pictures/classes/Multiversais.webp' }, { id: 'Namekuseijins', img: 'pictures/classes/Namekuseijins.webp' }, { id: 'Saiyajins', img: 'pictures/classes/Saiyajins.webp' }, { id: 'Terraqueos', img: 'pictures/classes/Terraqueos.webp' }];
 
     // Mapeia as habilidades únicas para o filtro de Skills
     const uniqueSkills = [];
@@ -561,7 +561,7 @@ window.addEventListener('scroll', () => {
     document.querySelectorAll('.card-action-popup').forEach(el => el.remove());
 }, { passive: true });
 
-// Listener para o Filtro de Tipo (Terráqueo / Alienígena)
+// Listener para o Filtro de Tipo (Terraqueo / Alienigena)
 document.getElementById('filtro-tipo').addEventListener('change', function() {
     const filtroTipo = this.value;
     const cartas = document.querySelectorAll('.card-unit');
