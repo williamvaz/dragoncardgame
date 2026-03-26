@@ -256,7 +256,7 @@ function openInfoPopup(char) {
     const idStr = char.ID.toString().padStart(5, '0');
 
     // Preenche a frente da carta no popup de giro 3D
-    document.querySelector(".flip-card-front").innerHTML = `<div class="card-image-area"><img src="pictures/characters/${idStr}.webp" class="char-img"><img src="pictures/rarity/${char.raridade_completa}.webp" class="layer-rarity"><img src="pictures/position/${char.position === 'Recuado' ? '1.webp' : '2.webp'}" class="layer-position"><img src="pictures/classes/${char.classe}.webp" class="layer-class"><img src="pictures/template/Frente.webp" class="layer-template-front"><div class="card-text-element layer-atk">${getCalculatedStat(char.atk, lvl)}</div><div class="card-text-element layer-hp">${getCalculatedStat(char.hp, lvl)}</div><div class="card-text-element layer-name">${char.nome}</div><div class="card-text-element layer-cost">${char.custo}</div></div>`;
+    document.querySelector(".flip-card-front").innerHTML = `<div class="card-image-area"><img src="pictures/characters/${idStr}.webp" class="char-img"><img src="pictures/rarity/${char.raridade_completa}.webp" class="layer-rarity"><img src="pictures/position/${char.position === 'Recuado' ? '1.webp' : '2.webp'}" class="layer-position"><img src="pictures/classes/${char.classe.normalize('NFD').replace(/[\u0300-\u036f]/g, "")}.webp" class="layer-class"><img src="pictures/template/Frente.webp" class="layer-template-front"><div class="card-text-element layer-atk">${getCalculatedStat(char.atk, lvl)}</div><div class="card-text-element layer-hp">${getCalculatedStat(char.hp, lvl)}</div><div class="card-text-element layer-name">${char.nome}</div><div class="card-text-element layer-cost">${char.custo}</div></div>`;
 
     // Preenche logo da saga e biografia
     const saga = sagasData.find(s => s.Saga === char.saga);
@@ -560,3 +560,18 @@ window.addEventListener('scroll', () => {
     hideDropdown();
     document.querySelectorAll('.card-action-popup').forEach(el => el.remove());
 }, { passive: true });
+
+// Listener para o Filtro de Tipo (Terráqueo / Alienígena)
+document.getElementById('filtro-tipo').addEventListener('change', function() {
+    const filtroTipo = this.value;
+    const cartas = document.querySelectorAll('.card-unit');
+
+    cartas.forEach(carta => {
+        const classeCarta = carta.getAttribute('data-classe');
+        if (filtroTipo === 'todos' || classeCarta === filtroTipo) {
+            carta.style.display = 'block';
+        } else {
+            carta.style.display = 'none';
+        }
+    });
+});

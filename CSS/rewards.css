@@ -109,18 +109,19 @@
     margin: 0;
 }
 
-.reward-item-name {
+.reward-amount-footer {
+    position: absolute;
+    bottom: -10dvw; /* Posiciona abaixo da borda da carta */
     font-family: 'VerdanaPro-CondBlack' !important;
-    font-size: 4dvw;
+    font-size: 10dvw; /* Aumentado para destaque como na imagem */
     font-weight: 900;
     text-align: center;
-    width: 90%;
+    width: 100%;
     background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.1dvh #000;
-    margin-top: 2px;
+    -webkit-text-stroke: 0.2dvh #000;
 }
 
 /* 4. BADGE DE ITENS RESTANTES */
@@ -179,20 +180,20 @@
     flex-direction: column;
     align-items: center;
     width: 90dvw;
-    max-width: 600px;
+    max-width: 80dvw; /* Convertido de 600px */
     background: rgba(0, 0, 0, 0.85);
-    border: 2px solid #a5e043;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(165, 224, 67, 0.4);
+    border: 0.3dvh solid #a5e043; /* Convertido de 0.3dvh */
+    border-radius: 2dvh; /* Convertido de 15px */
+    padding: 2.5dvh; /* Convertido de 20px */
+    box-shadow: 0 0 3dvh rgba(165, 224, 67, 0.4);
 }
 
 .final-grid-compact {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 1.5dvh; /* Convertido de 15px */
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 2dvh; /* Convertido de 20px */
     max-height: 60dvh;
     overflow-y: auto;
 }
@@ -202,11 +203,11 @@
     flex-direction: column;
     align-items: center;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    padding: 5px;
+    border-radius: 1dvh; /* Convertido de 10px */
+    padding: 0.6dvh; /* Convertido de 5px */
     position: relative;
-    border: 1px solid rgba(165, 224, 67, 0.2);
-    min-width: 80px; /* Garante que nunca fique menor que isso */
+    border: 0.15dvh solid rgba(165, 224, 67, 0.2); /* Convertido de 1px */
+    min-width: 15dvw; /* Convertido de 80px */
     transition: transform 0.2s;
 }
 
@@ -214,8 +215,8 @@
     width: 100%;
     aspect-ratio: 29.42 / 44.12;
     position: relative;
-    margin-bottom: 6px;
-    border-radius: 5px;
+    margin-bottom: 0.8dvh; /* Convertido de 6px */
+    border-radius: 0.6dvh; /* Convertido de 5px */
     overflow: hidden;
     background: #111;
     pointer-events: none;
@@ -259,7 +260,7 @@
 
 .item-name {
     font-family: 'VerdanaPro-CondBlack';
-    font-size: 0.7em;
+    font-size: 1.5dvw; /* Convertido de 0.7em */
     color: #fff;
     text-align: center;
     white-space: nowrap;
@@ -278,8 +279,8 @@
 .received-count {
     display: flex;
     align-items: center;
-    gap: 3px;
-    margin-top: 2px;
+    gap: 0.5dvw; /* Convertido de 3px */
+    margin-top: 0.3dvh; /* Convertido de 0.3dvh */
 }
 
 .small-card-icon {
@@ -288,28 +289,19 @@
 
 .received-val {
     font-family: 'VerdanaPro-CondBlack';
-    font-size: 0.9em;
+    font-size: 1.8dvw; /* Convertido de 0.9em */
     color: #a5e043;
 }
 
 /* 6. UPGRADES E BOTÃO COLETAR */
 .upgrade-badge {
-    position: absolute;
-    top: -5px; right: -5px;
-    background: #a5e043;
-    color: #000;
-    font-family: 'digital-7' !important;
-    font-size: 0.8em;
-    padding: 2px 5px;
-    border-radius: 3px;
-    z-index: 20;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(165, 224, 67, 0.8);
+    display: none !important;
 }
 
 .ready-upgrade {
-    border: 1px solid #a5e043 !important;
-    box-shadow: 0 0 15px rgba(165, 224, 67, 0.5) !important;
+    /* Remove a borda e o brilho externo, mantendo apenas o badge "UP!" se ele existir */
+    border: 0.15dvh solid rgba(165, 224, 67, 0.2) !important; 
+    box-shadow: none !important;
 }
 
 .btn-reward-close {
@@ -327,7 +319,7 @@
 
 .btn-reward-close:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #6b942a;
+    box-shadow: 0 0.3dvh 0 #6b942a;
 }
 
 /* 7. ANIMAÇÕES TÉCNICAS */
@@ -350,7 +342,7 @@
 }
 
 @keyframes shake-capsule {
-    0%, 100% { transform: translate(2px, 2px); }
+    0%, 100% { transform: translate(2px, 0.3dvh); }
     50% { transform: translate(-2px, -2px); }
 }
 
@@ -454,6 +446,194 @@
 
 /* Ajuste dos textos para serem proporcionais ao card mini */
 .reward-card-unit .card-text-element {
-    font-size: 10px !important; /* Use px aqui para evitar que suma */
-    -webkit-text-stroke: 0.5px black;
+    font-size: 1.2dvw !important; /* Convertido de 10px */
+    -webkit-text-stroke: 0.05dvh black; /* Convertido de 0.5px */
+}
+
+/* Para Senzus, Zenis e Esferas (Original) */
+.reward-item-name {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 4dvw;
+    font-weight: 900;
+    text-align: center;
+    width: 90%;
+    background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1dvh #000;
+    margin-top: 0.3dvh;
+}
+
+/* Para Cartas de Personagem (Nova) */
+.reward-amount-footer {
+    position: absolute;
+    bottom: -10dvw;
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 10dvw;
+    font-weight: 900;
+    text-align: center;
+    width: 100%;
+    background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.2dvh #000;
+}
+
+/* Ajuste de tamanho para o container da carta no popup de recompensa */
+.reward-card-pop .card-image-area {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 2dvw;
+    overflow: hidden;
+}
+
+/* Importando as regras de posicionamento das camadas (iguais à coleção) */
+.reward-card-pop .char-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.reward-card-pop .layer-rarity { position: absolute; top: 6.1%; left: 4.9%; width: 21.2%; z-index: 2; }
+.reward-card-pop .layer-position { position: absolute; top: 20.7%; left: 75.4%; width: 20.3%; z-index: 3; }
+.reward-card-pop .layer-class { position: absolute; top: 66%; left: 6.4%; width: 17.2%; z-index: 4; }
+.reward-card-pop .layer-template-front { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+
+/* Ajuste dos textos para a escala do popup de recompensa */
+.reward-card-pop .card-text-element {
+    position: absolute;
+    font-family: 'VerdanaPro-CondBlack' !important;
+    color: #fff;
+    z-index: 10;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.reward-card-pop .layer-cost { top: 12.5%; left: 84.4%; transform: translate(-50%, -50%); font-size: 5dvw; -webkit-text-stroke: 0.1dvh black; -webkit-text-fill-color: transparent; background-image: linear-gradient(to bottom, #ff4444 50%, #8b0000 50%); }
+.reward-card-pop .layer-name { top: 70.5%; left: 26.6%; font-size: 2.5dvw; -webkit-text-stroke: 0.05dvh black; -webkit-text-fill-color: transparent; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); letter-spacing: -0.1dvw; }
+.reward-card-pop .layer-atk { top: 84.525%; left: 27.5%; transform: translate(-50%, -50%); width: 40%; font-size: 5dvw; -webkit-text-stroke: 0.15dvh black; -webkit-text-fill-color: transparent; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); text-align: center; }
+.reward-card-pop .layer-hp { top: 84.525%; left: 72.5%; transform: translate(-50%, -50%); width: 40%; font-size: 5dvw; -webkit-text-stroke: 0.15dvh black; -webkit-text-fill-color: transparent; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); text-align: center; }
+
+.mini-reward-item.resource-item {
+    /* Define o fundo usando a imagem do template de itens */
+    background-image: url('../pictures/template/itens.webp');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none; /* Remove a borda anterior para não conflitar com a imagem */
+    padding: 0.6dvh;
+}
+
+/* Estilos para as camadas extras no resumo final */
+.mini-reward-item .layer-position {
+    position: absolute;
+    top: 20.7%;
+    left: 75.4%;
+    width: 20.3%;
+    z-index: 3;
+}
+
+.mini-reward-item .layer-class {
+    position: absolute;
+    top: 66%;
+    left: 6.4%;
+    width: 17.2%;
+    z-index: 4;
+}
+
+/* Container da arte na miniatura */
+.mini-reward-item .card-image-area {
+    width: 100%;
+    aspect-ratio: 29.42 / 44.12;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5dvw;
+}
+
+/* Ajuste de escala para os textos internos da miniatura (Resumo Final) */
+.mini-reward-item .card-text-element {
+    position: absolute;
+    z-index: 10;
+    font-family: 'VerdanaPro-CondBlack' !important;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+/* Posicionamento Individual (Escalado para o tamanho mini) */
+.mini-reward-item .layer-cost { top: 12.5%; left: 84.4%; transform: translate(-50%, -50%); font-size: 1.6dvw !important; -webkit-text-stroke: 0.02dvh black; background-image: linear-gradient(to bottom, #ff4444 50%, #8b0000 50%); }
+.mini-reward-item .layer-name { top: 69.6%; left: 26.6%; letter-spacing: -0.05dvw;font-size: 1.0dvw !important; -webkit-text-stroke: 0.01dvh black; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); letter-spacing: -0.02dvw; }
+.mini-reward-item .layer-atk { top: 84.525%; left: 27.5%; transform: translate(-50%, -50%); width: 40%; font-size: 1.6dvw !important; -webkit-text-stroke: 0.03dvh black; text-align: center; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); }
+.mini-reward-item .layer-hp { top: 84.525%; left: 72.5%; transform: translate(-50%, -50%); width: 40%; font-size: 1.6dvw !important; -webkit-text-stroke: 0.03dvh black; text-align: center; background-image: linear-gradient(to bottom, #ffffff 50%, #cccccc 50%); }
+
+/* Correção das Camadas Adicionais no Mini Card */
+.mini-reward-item .layer-position { top: 20.7%; left: 75.4%; width: 20.3%; z-index: 3; }
+.mini-reward-item .layer-class { top: 66%; left: 6.4%; width: 17.2%; z-index: 4; }
+
+/* Garante que o número recebido (+X) fique centralizado abaixo da miniatura */
+.mini-reward-item .received-val {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 1.8dvw;
+    font-weight: 900;
+    /* Gradiente via Webkit para manter o padrão das cartas */
+    background: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.06dvh #000;
+    margin-top: 0.5dvh;
+}
+
+/* Ajuste para garantir que o valor (+83) e o nome (ZENIS) caibam no mini card */
+.mini-reward-item.resource-item .card-info-compact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5dvh;
+}
+
+/* Estilo para o número (+16) */
+.mini-reward-item.resource-item .item-val {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 3.5dvw; /* Aumentado para destaque */
+    color: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-text-stroke: 0.08dvh #000; /* Borda preta para contraste no fundo claro */
+    display: block;
+    text-align: center;
+}
+
+/* Estilo para o nome (ZENIS) */
+.mini-reward-item.resource-item .item-name {
+    font-family: 'VerdanaPro-CondBlack' !important;
+    font-size: 3.0dvw; /* Proporcional ao número */
+    color: linear-gradient(to bottom, #ffffff 45%, #b3b3b3 55%);
+    -webkit-text-stroke: 0.08dvh #000; /* Borda preta para contraste no fundo claro */
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-top: -0.5dvh; /* Aproxima os dois textos */
+}
+
+.mini-reward-item.resource-item .reward-art-wrapper {
+    background: transparent !important;
+}
+
+/* Ajuste específico para a Raridade no Resumo Final */
+.mini-reward-item .layer-rarity {
+    position: absolute;
+    top: 6.1% !important;   /* Mantém a posição relativa ao topo */
+    left: 4.6% !important;  /* Mantém a posição relativa à esquerda */
+    width: 2.5dvh !important; /* <--- DIMINUA ESTE VALOR PARA DIMINUIR A RARIDADE */
+    height: 2.5dvh !important; /* <--- DIMINUA ESTE VALOR PARA DIMINUIR A RARIDADE */
+    z-index: 2;
+}
+
+/* Aproveite para ajustar os outros ícones caso fiquem grandes também */
+.mini-reward-item .layer-position {
+    width: 20.3% !important; /* <--- TAMANHO DO ÍCONE DE POSIÇÃO (Canto Superior Direito) */
+}
+
+.mini-reward-item .layer-class {
+    width: 17.2% !important; /* <--- TAMANHO DO ÍCONE DE CLASSE (Sobre a barra de ATK) */
 }

@@ -93,7 +93,7 @@ async function processResgate(capsuleId) {
     const resp = await fetch('JSONs/capsules_data.json');
     const capsules = await resp.json();
     const info = capsules.find(c => c.id === parseInt(capsuleId));
-    
+
     let queue = [];
     const coins = Math.floor(Math.random() * (info.coins[1] - info.coins[0] + 1)) + info.coins[0];
     if (coins > 0) queue.push({ type: 'coins', val: coins, img: 'assets/elements/coins.webp' });
@@ -141,39 +141,68 @@ function revealNextItem(queue, step) {
     if (stage.querySelector('.reward-card-pop')) stage.querySelector('.reward-card-pop').remove();
     const item = queue[step - 1];
     let vT = "", nB = "", isC = false;
+
     if (item.type === 'coins') { vT = `+${item.val}`; nB = "ZENIS"; }
     else if (item.type === 'senzus') { vT = `+${item.val}`; nB = "SENZUS"; }
     else if (item.type === 'esfera') { vT = item.estrelasDesc; nB = item.dragonName; }
-    else if (item.type === 'carta_personagem') { vT = item.rank; nB = `${item.nome} +${item.val}`; isC = true; }
-    
+    else if (item.type === 'carta_personagem') { vT = ""; nB = `+${item.val}`; isC = true; }
+
     const card = document.createElement('div');
     card.className = `reward-card-pop ${isC ? 'card-frente-template' : ''}`;
-    card.innerHTML = `
+    const nameClass = isC ? 'reward-amount-footer' : 'reward-item-name';
+
+    if (isC) {
+        // Busca dados do personagem para preencher as camadas (Baseado no seu colecao.js)
+        const charData = db_characters.find(c => parseInt(c.ID) === parseInt(item.id));
+        const idStr = item.id.toString().padStart(5, '0');
+
+        card.innerHTML = `
+        <div class="items-remaining-badge">
+            <div class="badge-icon-minimal"></div>
+            <span class="badge-count">${queue.length - step}</span>
+        </div>
+        <div class="card-image-area">
+            <img src="pictures/characters/${idStr}.webp" class="char-img">
+            <img src="pictures/rarity/${charData.raridade_completa}.webp" class="layer-rarity">
+            <img src="pictures/position/${charData.position === 'Recuado' ? '1.webp' : '2.webp'}" class="layer-position">
+            <img src="pictures/classes/${charData.classe}.webp" class="layer-class">
+            <img src="pictures/template/Frente.webp" class="layer-template-front">
+            <div class="card-text-element layer-atk">${charData.atk}</div>
+            <div class="card-text-element layer-hp">${charData.hp}</div>
+            <div class="card-text-element layer-name">${charData.nome}</div>
+            <div class="card-text-element layer-cost">${charData.custo}</div>
+        </div>
+        <div class="${nameClass}">${nB}</div>
+    `;
+    } else {
+        // Layout original para Moedas, Senzus e Esferas
+        card.innerHTML = `
         <div class="items-remaining-badge">
             <div class="badge-icon-minimal"></div>
             <span class="badge-count">${queue.length - step}</span>
         </div>
         <div class="card-art-container">
-            <img src="${item.img}" class="card-item-art ${ (item.type === 'esfera' || item.rank === 'Z') ? 'esfera-glow' : '' }">
+            <img src="${item.img}" class="card-item-art ${(item.type === 'esfera' || item.rank === 'Z') ? 'esfera-glow' : ''}">
         </div>
         <div class="reward-val-text">${vT}</div>
-        <div class="reward-item-name">${nB}</div>
+        <div class="${nameClass}">${nB}</div>
     `;
+    }
     stage.appendChild(card);
 }
 
 function showFinalSummary(totais) {
     const snapshotSaldos = {};
     jogadorCartas.forEach(c => { snapshotSaldos[c.id] = parseInt(c.cards) || 0; });
-    
+
     let itens = JSON.parse(localStorage.getItem('user_itens')) || { coins: 0, senzus: 0 };
     itens.coins += totais.coins;
     itens.senzus += totais.senzus;
     localStorage.setItem('user_itens', JSON.stringify(itens));
 
-    if (totais.esfera) { 
-        jogadorEsferas.push(totais.esfera.id); 
-        localStorage.setItem('user_esferas', JSON.stringify(jogadorEsferas)); 
+    if (totais.esfera) {
+        jogadorEsferas.push(totais.esfera.id);
+        localStorage.setItem('user_esferas', JSON.stringify(jogadorEsferas));
     }
 
     totais.slotsDeCartas.forEach(ganha => {
@@ -192,7 +221,7 @@ function showFinalSummary(totais) {
     if (totais.coins > 0) gridHTML += createMiniCardHTML('assets/elements/coins.webp', null, 'ZENIS', false, false, totais.coins);
     if (totais.senzus > 0) gridHTML += createMiniCardHTML('assets/elements/senzu.webp', null, 'SENZUS', false, false, totais.senzus);
     if (totais.esfera) gridHTML += createMiniCardHTML(totais.esfera.img, null, 'ESFERA', false, false, 'NOVA');
-    
+
     totais.slotsDeCartas.forEach(c => {
         const sAnt = snapshotSaldos[c.id] || 0;
         const sNov = getSaldoNumerico(c.id);
@@ -215,46 +244,47 @@ function showFinalSummary(totais) {
 
 function createMiniCardHTML(img, rank, name, isC = false, up = false, qtdRecebida = 0) {
     const clH = up ? 'ready-upgrade' : '';
-    const bdH = up ? '<div class="upgrade-badge">UP!</div>' : '';
-    
+    const bdH = '';
+
     if (!isC) {
         return `
-            <div class="mini-reward-item resource-item">
-                <div class="reward-art-wrapper">
-                    <img src="${img}" class="resource-img-fix">
-                </div>
-                <div class="card-info-compact">
-                    <span class="item-val">${typeof qtdRecebida === 'number' ? '+' + qtdRecebida : qtdRecebida}</span>
-                    <span class="item-name">${name}</span>
-                </div>
-            </div>`;
-    }
-
-    const charData = db_characters.find(c => c.nome === name);
-    const idStr = charData ? charData.ID.toString().padStart(5, '0') : "00001";
-
-    return `
-        <div class="mini-reward-item reward-card-unit ${clH}">
-            ${bdH}
-            <div class="reward-art-wrapper tcg-card-style">
-                <img src="pictures/background/${charData ? charData.raridade_completa : 'F'}.webp" class="layer-background">
-                <img src="pictures/characters/${idStr}.webp" class="char-img">
-                <img src="pictures/rarity/${rank}.webp" class="layer-rarity">
-                <img src="pictures/template/template_front.webp" class="layer-template-front">
-                
-                <div class="card-text-element layer-atk">${charData ? charData.atk : 0}</div>
-                <div class="card-text-element layer-hp">${charData ? charData.hp : 0}</div>
-                <div class="card-text-element layer-name">${name}</div>
-                <div class="card-text-element layer-cost">${charData ? charData.custo : 0}</div>
+        <div class="mini-reward-item resource-item">
+            <div class="reward-art-wrapper">
+                <img src="${img}" class="resource-img-fix">
             </div>
             <div class="card-info-compact">
-                <div class="received-count">
-                    <img src="assets/elements/card_icon_small.webp" class="small-card-icon">
-                    <span class="received-val">+${qtdRecebida}</span>
-                </div>
+                <span class="item-val">${typeof qtdRecebida === 'number' ? '+' + qtdRecebida : qtdRecebida}</span>
+                <span class="item-name">${name}</span>
             </div>
+        </div>`;
+    }
+
+    // Busca pelo nome exato para garantir que pegamos o objeto correto do banco
+    const charData = db_characters.find(c => c.nome === name);
+    const idStr = charData ? charData.ID.toString().padStart(5, '0') : "00001";
+    const rankCompleto = charData ? charData.raridade_completa : rank;
+
+    // Atualizando para usar as mesmas classes de camadas do seu sistema de coleção
+    return `
+    <div class="mini-reward-item reward-card-unit ${clH}">
+        ${bdH}
+        <div class="reward-art-wrapper card-image-area">
+            <img src="pictures/characters/${idStr}.webp" class="char-img">
+            <img src="pictures/rarity/${charData ? charData.raridade_completa : rank}.webp" class="layer-rarity">
+            <img src="pictures/position/${charData?.position === 'Recuado' ? '1.webp' : '2.webp'}" class="layer-position">
+            <img src="pictures/classes/${charData?.classe}.webp" class="layer-class">
+            <img src="pictures/template/Frente.webp" class="layer-template-front">
+            
+            <div class="card-text-element layer-atk">${charData ? charData.atk : 0}</div>
+            <div class="card-text-element layer-hp">${charData ? charData.hp : 0}</div>
+            <div class="card-text-element layer-name">${name}</div>
+            <div class="card-text-element layer-cost">${charData ? charData.custo : 0}</div>
         </div>
-    `;
+        <div class="card-info-compact">
+            <span class="received-val">+${qtdRecebida}</span>
+        </div>
+    </div>
+`;
 }
 
 function closeRewardScreen() { document.getElementById("reward-display-overlay").style.display = "none"; }
